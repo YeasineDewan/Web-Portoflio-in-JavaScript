@@ -1020,7 +1020,7 @@ Remember that performance optimization should be part of your development workfl
     title: 'Understanding OWASP Top 10: A Guide for Web Developers',
     slug: 'understanding-owasp-top-10',
     excerpt: 'A comprehensive guide to the OWASP Top 10 web application security risks and how to mitigate them in your web applications.',
-    content: `
+    content: String.raw`
 # Understanding OWASP Top 10: A Guide for Web Developers
 
 The Open Web Application Security Project (OWASP) Top 10 is a standard awareness document that represents the most critical security risks to web applications. As web developers, understanding these risks and knowing how to mitigate them is essential for building secure applications. In this article, I'll break down each of the OWASP Top 10 risks and provide practical mitigation strategies.
@@ -1613,9 +1613,9 @@ const { combine, timestamp, printf, colorize, json } = format;
 
 // Define log format
 const logFormat = printf(({ level, message, timestamp, ...metadata }) => {
-  return `${timestamp} [\${level}]: \${message} \${
+  return timestamp + ' [' + level + ']: ' + message + ' ' + (
     Object.keys(metadata).length ? JSON.stringify(metadata) : ''
-  }`;
+  );
 });
 
 // Create logger
