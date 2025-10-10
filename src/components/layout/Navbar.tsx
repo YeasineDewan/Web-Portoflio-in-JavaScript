@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { 
   Navbar as HeroNavbar, 
@@ -23,6 +23,17 @@ export const Navbar = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+    { name: 'Skills', path: '/skills' },
+    { name: 'Experience', path: '/experience' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'Services', path: '/services' },
+    { name: 'Hire Me', path: '/hire-me' },
+    { name: 'Contact', path: '/contact' }
+  ];
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },

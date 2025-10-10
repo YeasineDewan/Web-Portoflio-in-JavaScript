@@ -14,6 +14,7 @@ import { BlogPostPage } from './pages/BlogPostPage';
 import { CertificationsPage } from './pages/CertificationsPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { ContactPage } from './pages/ContactPage';
+import { HireMePage } from './pages/HireMePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ScrollToTop } from './components/utils/ScrollToTop';
 import { ScrollToTopButton } from './components/utils/ScrollToTopButton';
@@ -42,6 +43,7 @@ function App() {
           <Route path="/certifications" component={CertificationsPage} />
           <Route path="/services" component={ServicesPage} />
           <Route path="/contact" component={ContactPage} />
+          <Route path="/hire-me" component={HireMePage} />
           <Route component={NotFoundPage} />
         </Switch>
         <ScrollToTopButton />

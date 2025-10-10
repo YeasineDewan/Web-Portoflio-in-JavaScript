@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardBody, CardFooter, Button, Chip, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from '@heroui/react';
+import { Card, CardBody, CardFooter, Button, Chip, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Input } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 import { projects } from '../../data/projects';
@@ -116,33 +116,56 @@ export const ProjectsGrid = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
               >
-                <Card className="h-full card-hover">
+                <Card className="h-full group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 hover:border-primary/20">
                   <CardBody className="p-0">
-                    <div className="relative aspect-video">
-                      <img 
-                        src={project.coverImage} 
+                    <div className="relative aspect-video overflow-hidden">
+                      <img
+                        src={project.coverImage}
                         alt={project.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       {project.featured && (
                         <div className="absolute top-2 right-2">
-                          <Chip 
-                            color="primary" 
-                            variant="flat" 
+                          <Chip
+                            color="primary"
+                            variant="flat"
                             size="sm"
                             startContent={<Icon icon="lucide:star" className="text-xs" />}
+                            className="animate-pulse"
                           >
                             Featured
                           </Chip>
                         </div>
                       )}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50">
+                        <Button
+                          color="primary"
+                          variant="solid"
+                          size="lg"
+                          className="hover:scale-110 transition-transform"
+                          as={Link}
+                          to={`/projects/${project.slug}`}
+                        >
+                          <Icon icon="lucide:eye" className="mr-2" />
+                          View Project
+                        </Button>
+                      </div>
                     </div>
                     <div className="p-5">
-                      <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                      <p className="text-foreground-500 mb-4 line-clamp-2">{project.description}</p>
+                      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
+                      <p className="text-foreground-500 mb-4 line-clamp-2 group-hover:text-foreground-600 transition-colors">{project.description}</p>
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.tags.slice(0, 3).map(tag => (
-                          <Chip key={tag} color="default" variant="flat" size="sm">{tag}</Chip>
+                          <Chip
+                            key={tag}
+                            color="default"
+                            variant="flat"
+                            size="sm"
+                            className="hover:bg-primary/20 hover:text-primary transition-colors"
+                          >
+                            {tag}
+                          </Chip>
                         ))}
                         {project.tags.length > 3 && (
                           <Chip color="default" variant="flat" size="sm">+{project.tags.length - 3}</Chip>
