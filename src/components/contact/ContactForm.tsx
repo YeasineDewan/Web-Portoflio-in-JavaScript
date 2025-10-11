@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardBody, Input, Textarea, Button, Checkbox, Divider } from '@heroui/react';
 import { Icon } from '@iconify/react';
+import { Link } from 'react-router-dom';
 import { addToast } from '@heroui/react';
 
 export const ContactForm = () => {
@@ -82,17 +83,25 @@ export const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Simulate API call with a delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Replace with your actual Formspree form ID
+      const formspreeUrl = 'https://formspree.io/f/your_form_id';
       
-      // In a real app, you would send the form data to your backend
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // });
+      const response = await fetch(formspreeUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
       
-      // if (!response.ok) throw new Error('Failed to send message');
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
       
       setSubmissionStatus('success');
       addToast({
@@ -203,7 +212,7 @@ export const ContactForm = () => {
               isInvalid={!!errors.consent}
             >
               <span className="text-sm">
-                I agree to the <Link href="/privacy-policy" className="text-primary">privacy policy</Link> and consent to being contacted regarding my message.
+                I agree to the <Link to="/privacy-policy" className="text-primary">privacy policy</Link> and consent to being contacted regarding my message.
               </span>
             </Checkbox>
             {errors.consent && <p className="text-danger text-xs mt-1">{errors.consent}</p>}
