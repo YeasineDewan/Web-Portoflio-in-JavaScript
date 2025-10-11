@@ -91,7 +91,7 @@ html, body {
   text-wrap: balance;
 }
 
-// Add animation for security scan effect
+/* Add animation for security scan effect */
 @keyframes scan {
   0% {
     transform: translateY(-100%);
@@ -105,7 +105,7 @@ html, body {
   animation: scan 3s linear infinite;
 }
 
-// Add code highlighting styles
+/* Add code highlighting styles */
 .code-block {
   position: relative;
   margin: 1.5rem 0;
@@ -135,12 +135,12 @@ html, body {
   line-height: 1.5;
 }
 
-// Add smooth scrolling for anchor links
+/* Add smooth scrolling for anchor links */
 html {
   scroll-behavior: smooth;
 }
 
-// Add table of contents styles
+/* Add table of contents styles */
 .toc {
   position: sticky;
   top: 6rem;

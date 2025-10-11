@@ -1,161 +1,145 @@
 export const projects = [
   {
     id: 1,
-    title: 'Secure Web App Starter',
-    slug: 'secure-web-app-starter',
-    description: 'A comprehensive starter template for secure web applications using Next.js and MongoDB with authentication, RBAC, CSP, and rate limiting.',
+    title: 'Web Portfolio in JavaScript',
+    slug: 'web-portfolio-javascript',
+    description: 'A modern, interactive web portfolio built with JavaScript, showcasing projects and skills with smooth animations and responsive design.',
     highlights: [
-      'Built-in authentication system with JWT and secure HTTP-only cookies',
-      'Role-based access control (RBAC) for fine-grained permissions',
-      'Content Security Policy (CSP) implementation',
-      'Rate limiting to prevent brute force attacks',
-      'Input validation and sanitization',
-      'CSRF protection'
+      'Interactive portfolio with smooth animations',
+      'Responsive design for all devices',
+      'Project showcase with live demos',
+      'Contact form integration',
+      'Modern UI/UX design'
     ],
-    techStack: ['Next.js', 'MongoDB', 'TypeScript', 'Tailwind CSS', 'NextAuth.js'],
-    repoUrl: 'https://github.com/dewanshawon/secure-web-app-starter',
-    liveUrl: 'https://secure-web-app-starter.vercel.app',
-    coverImage: 'https://img.heroui.chat/image/dashboard?w=800&h=450&u=project-1',
+    techStack: ['JavaScript', 'HTML5', 'CSS3', 'GSAP', 'Responsive Design'],
+    repoUrl: 'https://github.com/YeasineDewan/Web-Portoflio-in-JavaScript.git',
+    liveUrl: 'https://web-portoflio-in-java-script.vercel.app/',
+    coverImage: 'https://img.heroui.chat/image/portfolio?w=800&h=450&u=project-1',
     images: [
-      'https://img.heroui.chat/image/dashboard?w=1200&h=800&u=project-1-1',
-      'https://img.heroui.chat/image/dashboard?w=1200&h=800&u=project-1-2',
-      'https://img.heroui.chat/image/dashboard?w=1200&h=800&u=project-1-3'
+      'https://img.heroui.chat/image/portfolio?w=1200&h=800&u=project-1-1',
+      'https://img.heroui.chat/image/portfolio?w=1200&h=800&u=project-1-2'
     ],
-    tags: ['Full-Stack', 'Security', 'Next.js', 'MongoDB', 'Authentication'],
+    tags: ['Frontend', 'JavaScript', 'Portfolio', 'Responsive'],
     featured: true,
-    year: 2024,
-    securityNotes: 'This starter template implements security best practices including secure authentication, CSRF protection, input validation, rate limiting, and proper content security policies. It also includes secure password hashing, secure session management, and protection against common web vulnerabilities.'
+    year: 2024
   },
   {
     id: 2,
-    title: 'CDN-Optimized Landing Page',
-    slug: 'cdn-optimized-landing-page',
-    description: 'A high-performance landing page template with Lighthouse score 95+, optimized images, and CDN configuration.',
+    title: 'Portfolio Website',
+    slug: 'portfolio-website',
+    description: 'A comprehensive portfolio website showcasing development skills, projects, and professional experience with modern design.',
     highlights: [
-      'Lighthouse performance score of 95+',
-      'Optimized image loading with WebP format and lazy loading',
-      'CDN configuration for global content delivery',
-      'Core Web Vitals optimization',
-      'Responsive design for all devices',
-      'SEO-friendly structure'
+      'Complete portfolio with multiple sections',
+      'Project gallery with detailed descriptions',
+      'Skills and experience showcase',
+      'Contact integration',
+      'Professional design'
     ],
-    techStack: ['React', 'Vite', 'Tailwind CSS', 'Cloudflare CDN'],
-    repoUrl: 'https://github.com/dewanshawon/cdn-optimized-landing',
-    liveUrl: 'https://cdn-optimized-landing.vercel.app',
-    coverImage: 'https://img.heroui.chat/image/landing?w=800&h=450&u=project-2',
+    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
+    repoUrl: 'https://github.com/YeasineDewan/portfolio.git',
+    liveUrl: 'https://dewan-shawon-portfolio.vercel.app/',
+    coverImage: 'https://img.heroui.chat/image/portfolio?w=800&h=450&u=project-2',
     images: [
-      'https://img.heroui.chat/image/landing?w=1200&h=800&u=project-2-1',
-      'https://img.heroui.chat/image/landing?w=1200&h=800&u=project-2-2',
-      'https://img.heroui.chat/image/landing?w=1200&h=800&u=project-2-3'
+      'https://img.heroui.chat/image/portfolio?w=1200&h=800&u=project-2-1',
+      'https://img.heroui.chat/image/portfolio?w=1200&h=800&u=project-2-2'
     ],
-    tags: ['Frontend', 'Performance', 'React', 'CDN', 'SEO'],
+    tags: ['React', 'TypeScript', 'Portfolio', 'Modern'],
     featured: true,
-    year: 2023,
-    securityNotes: 'This landing page implements security headers, subresource integrity for external resources, and proper CORS configuration. It also uses HTTPS-only resources and implements CSP to prevent XSS attacks.'
+    year: 2024
   },
   {
     id: 3,
-    title: 'Vulnerability Management Dashboard',
-    slug: 'vulnerability-management-dashboard',
-    description: 'A comprehensive dashboard for tracking security vulnerabilities, risk scoring, and generating reports.',
+    title: '10 Min School Clone',
+    slug: '10min-school-clone',
+    description: 'An e-learning platform clone featuring course management, video lessons, and interactive learning modules.',
     highlights: [
-      'Real-time vulnerability tracking and management',
-      'Risk scoring based on CVSS',
-      'Detailed reporting and analytics',
-      'Integration with scanning tools',
-      'Remediation workflow management',
-      'User role-based access control'
+      'Course management system',
+      'Video lesson integration',
+      'Interactive learning modules',
+      'User progress tracking',
+      'Admin dashboard'
     ],
-    techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Chart.js'],
-    repoUrl: 'https://github.com/dewanshawon/vulnerability-dashboard',
-    liveUrl: 'https://vulnerability-dashboard.vercel.app',
-    coverImage: 'https://img.heroui.chat/image/dashboard?w=800&h=450&u=project-3',
+    techStack: ['React', 'Node.js', 'MongoDB', 'Express', 'Video.js'],
+    repoUrl: 'https://github.com/YeasineDewan/10min-E-learrning-platform-.git',
+    liveUrl: 'https://10min-e-learrning-platform.vercel.app/',
+    coverImage: 'https://img.heroui.chat/image/learning?w=800&h=450&u=project-3',
     images: [
-      'https://img.heroui.chat/image/dashboard?w=1200&h=800&u=project-3-1',
-      'https://img.heroui.chat/image/dashboard?w=1200&h=800&u=project-3-2',
-      'https://img.heroui.chat/image/dashboard?w=1200&h=800&u=project-3-3'
+      'https://img.heroui.chat/image/learning?w=1200&h=800&u=project-3-1',
+      'https://img.heroui.chat/image/learning?w=1200&h=800&u=project-3-2'
     ],
-    tags: ['Full-Stack', 'Security', 'React', 'Node.js', 'Dashboard'],
+    tags: ['Full-Stack', 'E-learning', 'MERN', 'Education'],
     featured: true,
-    year: 2024,
-    securityNotes: 'This dashboard implements secure authentication with MFA, role-based access control, encrypted storage of sensitive data, audit logging, and secure API endpoints with proper rate limiting and input validation.'
+    year: 2023
   },
   {
     id: 4,
-    title: 'E-commerce Security Audit Tool',
-    slug: 'ecommerce-security-audit',
-    description: 'A specialized tool for auditing e-commerce websites for security vulnerabilities and compliance issues.',
+    title: 'Web Portfolio in HTML5, CSS3, JS',
+    slug: 'web-portfolio-html-css-js',
+    description: 'A classic web portfolio built with vanilla HTML5, CSS3, and JavaScript, featuring clean design and smooth interactions.',
     highlights: [
-      'Automated security scanning for e-commerce platforms',
-      'PCI DSS compliance checking',
-      'Payment gateway security verification',
-      'Customer data protection assessment',
-      'Detailed reporting with remediation steps',
-      'Scheduled scanning and monitoring'
+      'Vanilla JavaScript implementation',
+      'Clean and minimal design',
+      'Smooth CSS animations',
+      'Responsive layout',
+      'SEO optimized'
     ],
-    techStack: ['Python', 'React', 'PostgreSQL', 'Docker'],
-    repoUrl: 'https://github.com/dewanshawon/ecommerce-security-audit',
-    liveUrl: 'https://ecommerce-security-audit.vercel.app',
-    coverImage: 'https://img.heroui.chat/image/dashboard?w=800&h=450&u=project-4',
+    techStack: ['HTML5', 'CSS3', 'JavaScript', 'SCSS', 'Responsive Design'],
+    repoUrl: 'https://github.com/YeasineDewan/Personal.git',
+    liveUrl: 'https://portfolio2-ten-nu.vercel.app/',
+    coverImage: 'https://img.heroui.chat/image/portfolio?w=800&h=450&u=project-4',
     images: [
-      'https://img.heroui.chat/image/dashboard?w=1200&h=800&u=project-4-1',
-      'https://img.heroui.chat/image/dashboard?w=1200&h=800&u=project-4-2'
+      'https://img.heroui.chat/image/portfolio?w=1200&h=800&u=project-4-1'
     ],
-    tags: ['Security', 'E-commerce', 'Audit', 'Compliance', 'Python'],
+    tags: ['Frontend', 'HTML5', 'CSS3', 'Vanilla JS'],
     featured: false,
-    year: 2023,
-    securityNotes: 'This tool is designed with security in mind, implementing secure API access, encrypted storage of scan results, and secure credential management. It also includes protection against common web vulnerabilities and secure report generation.'
+    year: 2023
   },
   {
     id: 5,
-    title: 'Secure File Sharing Platform',
-    slug: 'secure-file-sharing',
-    description: 'An end-to-end encrypted file sharing platform with secure access controls and expiring links.',
+    title: 'E-commerce Website (Frutiables)',
+    slug: 'ecommerce-frutiables',
+    description: 'A fully functional e-commerce website for fresh produce with shopping cart, payment integration, and admin panel.',
     highlights: [
-      'End-to-end encryption for all files',
-      'Secure access controls with expiring links',
-      'Two-factor authentication for sensitive operations',
-      'Audit logging of all file access',
-      'Secure deletion of expired content',
-      'Zero-knowledge architecture'
+      'Complete e-commerce functionality',
+      'Shopping cart and checkout',
+      'Payment gateway integration',
+      'Admin panel for inventory management',
+      'User authentication'
     ],
-    techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'AWS S3'],
-    repoUrl: 'https://github.com/dewanshawon/secure-file-sharing',
-    liveUrl: 'https://secure-file-sharing.vercel.app',
-    coverImage: 'https://img.heroui.chat/image/dashboard?w=800&h=450&u=project-5',
+    techStack: ['HTML5', 'CSS3', 'JavaScript', 'PHP', 'MySQL'],
+    repoUrl: 'https://github.com/YeasineDewan/E-commece-website-frutiables.git',
+    liveUrl: 'https://e-commece-website-frutiables.vercel.app/',
+    coverImage: 'https://img.heroui.chat/image/ecommerce?w=800&h=450&u=project-5',
     images: [
-      'https://img.heroui.chat/image/dashboard?w=1200&h=800&u=project-5-1',
-      'https://img.heroui.chat/image/dashboard?w=1200&h=800&u=project-5-2'
+      'https://img.heroui.chat/image/ecommerce?w=1200&h=800&u=project-5-1',
+      'https://img.heroui.chat/image/ecommerce?w=1200&h=800&u=project-5-2'
     ],
-    tags: ['Full-Stack', 'Security', 'Encryption', 'React', 'Node.js'],
+    tags: ['E-commerce', 'Full-Stack', 'PHP', 'MySQL'],
     featured: false,
-    year: 2023,
-    securityNotes: 'This platform implements client-side encryption, secure key management, secure file storage with AWS S3, access control lists, and secure sharing mechanisms. It also includes protection against common web vulnerabilities and secure deletion of expired content.'
+    year: 2023
   },
   {
     id: 6,
-    title: 'Performance Monitoring Dashboard',
-    slug: 'performance-monitoring',
-    description: 'A real-time performance monitoring dashboard for web applications with alerts and historical data analysis.',
+    title: 'HR and CRM Web App',
+    slug: 'hr-crm-admin',
+    description: 'A comprehensive HR and CRM management system built with MERN stack, featuring employee management, customer relations, and analytics.',
     highlights: [
-      'Real-time performance metrics monitoring',
-      'Core Web Vitals tracking',
-      'Custom alert configuration',
-      'Historical data analysis and trends',
-      'Integration with popular monitoring tools',
-      'Customizable dashboards'
+      'Employee management system',
+      'Customer relationship management',
+      'Analytics and reporting',
+      'Role-based access control',
+      'Real-time notifications'
     ],
-    techStack: ['React', 'Node.js', 'Express', 'InfluxDB', 'Chart.js'],
-    repoUrl: 'https://github.com/dewanshawon/performance-monitoring',
-    liveUrl: 'https://performance-monitoring.vercel.app',
+    techStack: ['MongoDB', 'Express', 'React', 'Node.js', 'Socket.io'],
+    repoUrl: 'https://github.com/YeasineDewan/HR-CRM-ADMIN.git',
+    liveUrl: 'https://hr-crm-admin-client.vercel.app/',
     coverImage: 'https://img.heroui.chat/image/dashboard?w=800&h=450&u=project-6',
     images: [
       'https://img.heroui.chat/image/dashboard?w=1200&h=800&u=project-6-1',
       'https://img.heroui.chat/image/dashboard?w=1200&h=800&u=project-6-2'
     ],
-    tags: ['Full-Stack', 'Performance', 'Monitoring', 'React', 'Node.js'],
-    featured: false,
-    year: 2022,
-    securityNotes: 'This dashboard implements secure authentication, role-based access control, secure API endpoints, and protection against common web vulnerabilities. It also includes secure storage of monitoring data and secure alert configuration.'
+    tags: ['Full-Stack', 'MERN', 'HR', 'CRM', 'Management'],
+    featured: true,
+    year: 2024
   }
 ];
