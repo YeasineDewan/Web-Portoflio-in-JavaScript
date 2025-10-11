@@ -31,17 +31,6 @@ export const Navbar = () => {
     { name: 'Projects', path: '/projects' },
     { name: 'Blog', path: '/blog' },
     { name: 'Services', path: '/services' },
-    { name: 'Hire Me', path: '/hire-me' },
-    { name: 'Contact', path: '/contact' }
-  ];
-  const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Skills', path: '/skills' },
-    { name: 'Experience', path: '/experience' },
-    { name: 'Projects', path: '/projects' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Services', path: '/services' },
     { name: 'Contact', path: '/contact' }
   ];
 
@@ -120,7 +109,11 @@ export const Navbar = () => {
               <DropdownItem key="language" startContent={<Icon icon="lucide:globe" />}>
                 <LanguageSwitcher />
               </DropdownItem>
-              <DropdownItem key="hire" as={RouterLink} to="/contact" startContent={<Icon icon="lucide:message-square" />}>
+              <DropdownItem
+                key="hire"
+                startContent={<Icon icon="lucide:message-square" />}
+                onClick={() => { window.location.href = '/contact'; }}
+              >
                 Hire Me
               </DropdownItem>
             </DropdownMenu>
