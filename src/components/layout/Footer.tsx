@@ -7,7 +7,7 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   const socialLinks = [
-    { name: 'GitHub', icon: 'logos:github-icon', url: 'https://github.com/dewanshawon' },
+    { name: 'GitHub', icon: 'logos:github-icon', url: 'https://github.com/YeasineDewan' },
     { name: 'LinkedIn', icon: 'logos:linkedin-icon', url: 'https://bd.linkedin.com/in/md-yeasine-dewan-shawon-073883210' },
     { name: 'Facebook', icon: 'logos:facebook', url: 'https://www.facebook.com/yeasinedewan.shawon.57' }
   ];
@@ -102,7 +102,7 @@ export const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-center gap-2">
                 <Icon icon="lucide:map-pin" className="text-primary" />
-                <span className="text-foreground-500">Singair, Manikganj, Bangladesh</span>
+                <span className="text-foreground-500">1188/2/b,Bank colony, Barekmolla mor, 60 feet, Mirpur, Dhaka, Bangladesh</span>
               </li>
               <li className="flex items-center gap-2">
                 <Icon icon="lucide:mail" className="text-primary" />
@@ -110,7 +110,7 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <Icon icon="lucide:phone" className="text-primary" />
-                <span className="text-foreground-500">+880 XXXX-XXXXXX</span>
+                <span className="text-foreground-500">+880 0179-3244543</span>
               </li>
             </ul>
           </div>
@@ -120,7 +120,7 @@ export const Footer = () => {
         
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-foreground-500 text-sm">
-            © {currentYear} MD. Yeasine Dewan Shawon. All rights reserved.
+            © {currentYear} MD. Yeasine Dewan Shawon. @All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link as={RouterLink} to="/privacy-policy" color="foreground" className="text-sm text-foreground-500">
