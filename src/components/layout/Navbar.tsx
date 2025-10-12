@@ -87,18 +87,6 @@ export const Navbar = () => {
         </NavbarItem>
         <NavbarItem>
           <Button
-            as="a"
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            color="default"
-            variant="flat"
-            startContent={<Icon icon="lucide:download" />}
-            className="hidden sm:flex mr-2"
-          >
-            Resume
-          </Button>
-          <Button
             as={RouterLink}
             to="/contact"
             color="primary"
