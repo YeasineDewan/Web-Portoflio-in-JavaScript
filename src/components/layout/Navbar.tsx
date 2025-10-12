@@ -86,11 +86,23 @@ export const Navbar = () => {
           <LanguageSwitcher />
         </NavbarItem>
         <NavbarItem>
-          <Button 
-            as={RouterLink} 
-            to="/contact" 
-            color="primary" 
-            variant="flat" 
+          <Button
+            as="a"
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            color="default"
+            variant="flat"
+            startContent={<Icon icon="lucide:download" />}
+            className="hidden sm:flex mr-2"
+          >
+            Resume
+          </Button>
+          <Button
+            as={RouterLink}
+            to="/contact"
+            color="primary"
+            variant="flat"
             startContent={<Icon icon="lucide:message-square" />}
             className="hidden sm:flex"
           >
@@ -103,6 +115,17 @@ export const Navbar = () => {
               </Button>
             </DropdownTrigger>
             <DropdownMenu aria-label="Actions">
+              <DropdownItem key="resume" startContent={<Icon icon="lucide:download" />}>
+                <Link
+                  as="a"
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full"
+                >
+                  Download Resume
+                </Link>
+              </DropdownItem>
               <DropdownItem key="theme" startContent={<Icon icon="lucide:moon" />}>
                 <ThemeSwitcher />
               </DropdownItem>
