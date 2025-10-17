@@ -8,8 +8,8 @@ export const Footer = () => {
   
   const socialLinks = [
     { name: 'GitHub', icon: 'logos:github-icon', url: 'https://github.com/YeasineDewan' },
-    { name: 'LinkedIn', icon: 'logos:linkedin-icon', url: 'https://bd.linkedin.com/in/md-yeasine-dewan-shawon-073883210' },
-    { name: 'Facebook', icon: 'logos:facebook', url: 'https://www.facebook.com/yeasinedewan.shawon.57' }
+    { name: 'LinkedIn', icon: 'logos:linkedin-icon', url: 'https://www.linkedin.com/in/md-yeasine-dewan-shawon-07a383210/' },
+    { name: 'Facebook', icon: 'logos:facebook', url: 'https://www.facebook.com/yeasinedewan.shawon.5' }
   ];
 
   const navLinks = [
