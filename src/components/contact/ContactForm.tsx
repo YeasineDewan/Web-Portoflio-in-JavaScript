@@ -241,7 +241,7 @@ export const ContactForm = () => {
             </div>
             <div>
               <p className="text-sm text-foreground-500">Email</p>
-              <p className="font-medium">contact@yeasinedewan.com</p>
+              <p className="font-medium">yeasinedewanshawon@gmail.com</p>
             </div>
           </div>
           
@@ -251,7 +251,7 @@ export const ContactForm = () => {
             </div>
             <div>
               <p className="text-sm text-foreground-500">Phone</p>
-              <p className="font-medium">+880 XXXX-XXXXXX</p>
+              <p className="font-medium">+880 0179-3244543</p>
             </div>
           </div>
           
