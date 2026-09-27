@@ -144,7 +144,7 @@ export const Hero = () => {
               <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-primary-600 to-secondary-600 p-1">
                 <div className="relative rounded-xl overflow-hidden aspect-[4/5] md:aspect-[3/4]">
                   <img 
-                    src="https://img.heroui.chat/image/avatar?w=600&h=800&u=yeasine-1" 
+                    src="/img/hero_img.png" 
                     alt="Yeasine Dewan" 
                     className="w-full h-full object-cover"
                   />
