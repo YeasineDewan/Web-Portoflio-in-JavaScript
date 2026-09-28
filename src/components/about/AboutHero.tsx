@@ -56,7 +56,7 @@ export const AboutHero = () => {
             className="order-1 lg:order-2"
           >
             <div className="relative">
-              <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-primary-600 to-secondary-600 p-1">
+              <div className="rounded-2xl overflow-hidden p-1">
                 <div className="relative rounded-xl overflow-hidden aspect-[4/5]">
                   <img 
                     src="/img/about_hero_img.png"
