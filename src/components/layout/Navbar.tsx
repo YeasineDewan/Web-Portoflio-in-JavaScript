@@ -55,7 +55,7 @@ export const Navbar = () => {
         />
         <NavbarBrand>
           <RouterLink to="/" className="flex items-center gap-2">
-            <div className="bg-primary p-1 rounded-md">
+            <div className="bg-primary p-1 rounded-full">
               <Icon icon="lucide:shield-check" className="text-white text-xl" />
             </div>
             <p className="font-semibold text-inherit">Yeasine Dewan</p>
