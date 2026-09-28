@@ -53,8 +53,7 @@ export const AboutHero = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="order-1 lg:order-2"
           >
-            <div className="relative w-full">
-              <div className="rounded-2xl overflow-hidden border border-content3/50 shadow-lg">
+              <div className="relative w-full">
                 <div className="relative aspect-[4/5]">
                   <img
                     src="/img/about_hero_img.png"
@@ -62,7 +61,6 @@ export const AboutHero = () => {
                     className="w-full h-full object-cover object-bottom"
                   />
                 </div>
-              </div>
 
               {/* Professional credential badge */}
               <div className="absolute -bottom-4 -right-4 bg-content1 shadow-md rounded-xl p-3 border border-content3 flex items-center gap-2">
