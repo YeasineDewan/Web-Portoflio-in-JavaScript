@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
@@ -60,7 +59,7 @@ export const AboutHero = () => {
               <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-primary-600 to-secondary-600 p-1">
                 <div className="relative rounded-xl overflow-hidden aspect-[4/5]">
                   <img 
-                    src="https://img.heroui.chat/image/avatar?w=600&h=800&u=yeasine-2" 
+                    src="/img/about_hero_img.png"
                     alt="Yeasine Dewan" 
                     className="w-full h-full object-cover"
                   />
