@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Tooltip } from '@heroui/react';
 import { Icon } from '@iconify/react';
@@ -143,18 +142,18 @@ export const Hero = () => {
               {/* Main image with security-themed overlay */}
               <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-primary-600 to-secondary-600 p-1">
                 <div className="relative rounded-xl overflow-hidden aspect-[4/5] md:aspect-[3/4]">
-                  <img 
-                    src="/img/hero_img.png" 
-                    alt="Yeasine Dewan" 
-                    className="w-full h-full object-cover"
-                  />
-                  {/* Security overlay pattern */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent mix-blend-overlay opacity-40"></div>
-                  
-                  {/* Animated security scan effect */}
-                  <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute inset-0 border-t-2 border-primary-400/30 animate-scan"></div>
-                  </div>
+                   <img 
+                     src="/img/hero_img.png" 
+                     alt="Yeasine Dewan" 
+                     className="w-full h-full object-cover"
+                   />
+                   {/* Security overlay pattern */}
+                   <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent"></div>
+                   
+                   {/* Animated security scan effect */}
+                   <div className="absolute inset-0 overflow-hidden">
+                     <div className="absolute inset-0 border-t-2 border-white/20 dark:border-primary-300/40 animate-scan"></div>
+                   </div>
                 </div>
               </div>
               
