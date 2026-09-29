@@ -43,10 +43,9 @@ export const Navbar = () => {
 
   return (
     <HeroNavbar 
-      isBordered 
       isBlurred
       maxWidth="xl"
-      className="bg-background/70 backdrop-blur-md"
+      className="bg-background/70 backdrop-blur-md rounded-full shadow-lg"
     >
       <NavbarContent>
         <NavbarMenuToggle
@@ -55,7 +54,7 @@ export const Navbar = () => {
         />
         <NavbarBrand>
           <RouterLink to="/" className="flex items-center gap-2">
-            <div className="bg-primary p-1 rounded-full">
+            <div className="bg-primary p-1 rounded-md">
               <Icon icon="lucide:shield-check" className="text-white text-xl" />
             </div>
             <p className="font-semibold text-inherit">Yeasine Dewan</p>
