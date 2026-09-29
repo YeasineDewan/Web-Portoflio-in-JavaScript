@@ -29,7 +29,7 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-content1 pt-16 pb-8">
+    <footer className="bg-content4/90 dark:bg-content1/90 pt-16 pb-8 border-t border-divider">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Column */}

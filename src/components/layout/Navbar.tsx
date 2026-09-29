@@ -45,7 +45,7 @@ export const Navbar = () => {
     <HeroNavbar 
       isBlurred
       maxWidth="xl"
-      className="bg-background/70 backdrop-blur-md rounded-full shadow-lg"
+      className="bg-content4/90 dark:bg-content1/90 backdrop-blur-md rounded-full shadow-xl border border-divider"
     >
       <NavbarContent>
         <NavbarMenuToggle
