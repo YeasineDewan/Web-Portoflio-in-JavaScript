@@ -22,7 +22,7 @@ export const Experience = () => {
     {
       company: 'Wave 3 Limited',
       role: 'Lead Web Developer',
-      period: 'Feb 2025 – Present',
+      period: '01 February 2025 – 15 January 2026',
       address: '',
       achievements: [
         'Built and maintained secure web apps end‑to‑end; led code reviews and team rituals',
