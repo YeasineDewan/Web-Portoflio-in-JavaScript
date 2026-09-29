@@ -1836,5 +1836,396 @@ As web developers, we have a responsibility to build applications that not only 
     publishedAt: '2023-12-10',
     status: 'draft',
     readingTime: 20
+  },
+  {
+    id: 6,
+    title: 'Zero Trust Architecture: Beyond the Traditional Security Perimeter',
+    slug: 'zero-trust-architecture-beyond-perimeter',
+    excerpt: 'Zero Trust replaces the castle-and-moat model with a verify-always approach. Learn the three pillars and practical steps to apply Zero Trust to your web applications.',
+    content: `# Zero Trust Architecture: Beyond the Traditional Security Perimeter
+
+For decades, enterprise security relied on a castle-and-moat model: trust everything inside the network and distrust everything outside. Zero Trust rejects that assumption entirely. Its core principle is simple and powerful: never trust, always verify. Whether a request originates from inside or outside the network, it must be authenticated, authorized, and continuously validated.
+
+In this article we explore what Zero Trust means in practice, the key principles behind it, and how to start applying it to modern web applications.
+
+## Why the Old Model Breaks Down
+
+The traditional perimeter model assumes that once a user or device is inside the corporate network, it can be trusted. This breaks down quickly because:
+
+- Remote work moves users and devices everywhere.
+- Cloud services host applications outside the perimeter.
+- Lateral movement lets one compromised internal device reach every internal system.
+- Insider threats already sit on the trusted side.
+
+Zero Trust treats the network as inherently hostile. Every access decision is based on identity, device posture, and context, not network location.
+
+## The Three Pillars of Zero Trust
+
+NIST defines Zero Trust around three tenets:
+
+### 1. Continuous Authentication and Authorization
+
+Authentication is not a one-time event. Tokens should be short-lived and re-evaluated. Combine MFA with adaptive risk signals such as device health, geolocation, and behavior baselines.
+
+\`\`\`javascript
+// Issue a short-lived access token and a rotating refresh token
+const access = jwt.sign({ sub: user.id, scope: "read:profile" }, secret, {
+  expiresIn: "15m",
+});
+
+const refresh = jwt.sign({ sub: user.id }, refreshSecret, {
+  expiresIn: "30d",
+});
+\`\`\`
+
+Use refresh-token rotation with reuse detection. A refresh token is single-use, and any reuse is a strong signal of token theft.
+
+### 2. Least-Privilege Access
+
+Grant the minimum scope required, and only for the time it is needed. Implement time-bound just-in-time access for administrative actions.
+
+### 3. Assume Breach
+
+Treat the network as if it is already compromised. Micro-segment traffic so lateral movement is limited. Encrypt in transit and at rest everywhere.
+
+## Practical Steps for Web Applications
+
+- Put an identity provider in front of every application. Single sign-on with OpenID Connect gives you a trusted identity assertion.
+- Enforce MFA for all accounts, especially administrators.
+- Scope access tokens narrowly using scopes and claims.
+- Add authorization at the edge and the API layer with policy enforcement points.
+- Instrument telemetry: log authentication, authorization, and data-access events for monitoring.
+
+## A Minimal Policy-as-Code Example
+
+Policies should be version-controlled and reviewable. Here is an example using Open Policy Agent to enforce that only the owner of a document can edit it.
+
+\`\`\`rego
+# policy: document access
+package documents
+
+allow {
+  input.method = "GET"
+  input.owner_id = input.user_id
+}
+
+allow {
+  input.method = "PUT"
+  input.owner_id = input.user_id
+  input.body.owner_id = input.owner_id
+}
+\`\`\`
+
+## Conclusion
+
+Zero Trust is a mindset as much as a technology stack. Start small: centralize identity, adopt MFA, scope tokens tightly, and log everything. Each of these steps shrinks the attack surface and reduces the impact of a breach, no matter where requests originate.
+`,
+    coverImage: 'https://img.heroui.chat/image/dashboard?w=800&h=450&u=blog-6',
+    tags: ['Security', 'Architecture', 'Zero Trust'],
+    publishedAt: '2025-08-12',
+    status: 'published',
+    readingTime: 9
+  },
+  {
+    id: 7,
+    title: 'Securing the CI/CD Supply Chain: From SLSA to Sigstore',
+    slug: 'securing-cicd-supply-chain-slsa-sigstore',
+    excerpt: 'Prevent dependency-confusion and tampering with SLSA provenance and Sigstore signing. A practical guide to securing your build pipeline from source to production.',
+    content: `# Securing the CI/CD Supply Chain: From SLSA to Sigstore
+
+Modern applications ship with dozens to hundreds of dependencies. Every build step, from fetching open-source packages to publishing container images, is a potential place for an attacker to inject malicious code. Supply-chain attacks like SolarWinds and the recent dependency-confusion incidents proved that compromising the build pipeline can be more effective than attacking end users directly.
+
+This article explains how to secure your CI/CD pipeline using SLSA provenance and Sigstore signatures, with practical steps you can add today.
+
+## Threat Model for the Pipeline
+
+Value flows through a pipeline in stages:
+
+- Source code in version control.
+- Dependencies fetched from package registries.
+- Build jobs executed by a CI runner.
+- Artifacts stored in a registry.
+- Deployment to production.
+
+At each stage, an attacker can inject, mutate, or impersonate. The goal is to produce verifiable evidence that an artifact came from your trusted pipeline and nothing else.
+
+## What Is SLSA?
+
+SLSA (Supply-chain Levels for Software Artifacts) is a graduated framework that defines increasing levels of supply-chain integrity. SLSA 3, the level most teams should target, requires:
+
+- A top-level, hermetic build with no network access.
+- A build defined by a declarative spec in source.
+- A non-falsifiable build service where builders are authenticated and authorized.
+- Provenance emitted by the build service describing the source, dependencies, and build.
+
+## Signing with Sigstore
+
+Sigstore provides a free, transparent way to sign software artifacts using short-lived certificates tied to an OpenID Connect identity. No long-lived signing keys to leak.
+
+\`\`\`bash
+# Install cosign
+brew install sigstore/tap/cosign
+
+# Sign an image with keyless signing
+cosign sign --yes ghcr.io/your-org/app:1.0.0
+
+# Verify signature and SLSA provenance
+cosign verify --yes \\
+  --certificate-oidc-issuer=https://accounts.google.com \\
+  --certificate-identity-regexp=.*your-org.* \\
+  ghcr.io/your-org/app:1.0.0
+\`\`\`
+
+## Hardening Your Build
+
+- Pin everything: dependencies, base images, and the toolchain. Use lockfiles and digest-pinned images.
+- Run builds hermetically: block network access from build steps so only declared dependencies are used.
+- Generate provenance: use GitHub Actions with sigstore attestations or slsa-framework generators to produce SLSA provenance for your releases.
+- Verify before deploy: gate deployments on signature verification and provenance checks in your release pipeline.
+
+## Defending Against Dependency Confusion
+
+Publish internal package names to a private registry, and configure your clients to never fall back to the public registry for scoped packages. An example npm config:
+
+\`\`\`ini
+@your-org:registry=https://npm.your-org.internal/
+strict-ssl=true
+\`\`\`
+
+## Conclusion
+
+Supply-chain security is about making builds reproducible and verifiable rather than just hoping the artifacts are clean. By combining SLSA build standards with Sigstore signing, you create a chain of evidence that an artifact was produced by your pipeline and nothing else.
+`,
+    coverImage: 'https://img.heroui.chat/image/dashboard?w=800&h=450&u=blog-7',
+    tags: ['CI/CD', 'Security', 'DevSecOps'],
+    publishedAt: '2025-06-28',
+    status: 'published',
+    readingTime: 10
+  },
+  {
+    id: 8,
+    title: 'API Security Essentials: Protecting REST, GraphQL, and gRPC',
+    slug: 'api-security-essentials-rest-graphql-grpc',
+    excerpt: 'A practical guide to securing REST, GraphQL, and gRPC APIs with JWT authentication, scoped authorization, rate limiting, and style-specific defenses.',
+    content: `# API Security Essentials: Protecting REST, GraphQL, and gRPC
+
+APIs are the connective tissue of modern applications, and they are also one of the most common attack surfaces. Each API style, REST, GraphQL, and gRPC, introduces its own convenience and its own security pitfalls. This article covers the shared fundamentals of API security and the style-specific risks you must address.
+
+## Shared Foundations
+
+These practices apply regardless of style.
+
+### 1. Authenticate Every Request
+
+Never rely on IP allow-lists or obscurity. Use OAuth 2.0 or OpenID Connect, and require a short-lived bearer token on every endpoint. Validate the token signature, issuer, audience, and expiry.
+
+\`\`\`javascript
+// Express middleware verifying a JWT access token
+app.use("/api", async (req, res, next) => {
+  const header = req.headers.authorization || "";
+  const [scheme, token] = header.split(" ");
+  if (scheme !== "Bearer" || !token) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+  try {
+    const payload = jwt.verify(token, process.env.JWT_PUBLIC_KEY, {
+      algorithms: ["RS256"],
+      issuer: process.env.ISSUER,
+      audience: process.env.AUDIENCE,
+    });
+    req.user = payload;
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+});
+\`\`\`
+
+### 2. Authorize with Scoped Tokens
+
+Embed scopes in the token and enforce them per operation. A read-only token must never mutate data.
+
+### 3. Rate Limit
+
+Apply rate limits and anomaly detection to catch brute-force and abuse.
+
+## REST-Specific Risks
+
+REST flexibility invites overbrowsing, mass assignment, and IDOR. Mitigate with server-side authorization that checks the actual resource owner. Never trust a client-supplied ID to grant access.
+
+## GraphQL-Specific Risks
+
+GraphQL lets clients craft arbitrarily deep queries, which can exhaust your resolvers through query complexity. Protect with query complexity limits, depth limiting, and persisted allow-listed queries in production.
+
+\`\`\`javascript
+// Enforce complexity using a query-complexity estimator
+const limiter = new QueryComplexity({
+  maximumComplexity: 100,
+  estimators: [simpleEstimator({ defaultComplexity: 1 })],
+  createError: () => new Error("Query too complex"),
+});
+\`\`\`
+
+Also disable introspection in production:
+
+\`\`\`javascript
+app.use("/graphql", graphqlMiddleware, (req, res, next) => {
+  if (process.env.NODE_ENV === "production" && isIntrospection(req)) {
+    return res.status(403).json({ error: "Introspection disabled" });
+  }
+  next();
+});
+\`\`\`
+
+## gRPC-Specific Considerations
+
+gRPC traffic should always use mutual TLS for both encryption and service-to-service identity. Enable TLS on your server:
+
+\`\`\`go
+// Go: gRPC server with TLS credentials
+creds, err := credentials.NewServerTLSFromFile("server.crt", "server.key")
+if err != nil {
+  log.Fatalf("failed to load TLS keys: %v", err)
+}
+lis, err := net.Listen("tcp", ":50051")
+s := grpc.NewServer(grpc.Creds(creds))
+pb.RegisterAppServer(s, &server{})
+s.Serve(lis)
+\`\`\`
+
+Validate authorization using metadata and apply rate limiting at the sidecar or service mesh layer.
+
+## Output Security
+
+Apply consistent input validation, output encoding, and security headers. For browser-facing APIs, set Content-Type, X-Content-Type-Options nosniff, and a strict CORS policy that allows only known origins.
+
+\`\`\`nginx
+# nginx CORS for a browser SPA
+add_header Access-Control-Allow-Origin "https://app.example.com";
+add_header Vary "Origin";
+add_header Access-Control-Allow-Headers "Authorization,Content-Type";
+add_header Access-Control-Allow-Methods "GET,POST,PUT,DELETE";
+\`\`\`
+
+## Conclusion
+
+API security is layered: authenticate and authorize tightly, constrain each style's unique risks (REST IDOR, GraphQL depth, gRPC mTLS), and add rate limiting and security headers. Treat your API contract as an attack surface worth defending at every layer.
+`,
+    coverImage: 'https://img.heroui.chat/image/dashboard?w=800&h=450&u=blog-8',
+    tags: ['API', 'Security', 'Backend'],
+    publishedAt: '2025-04-15',
+    status: 'published',
+    readingTime: 12
+  },
+  {
+    id: 9,
+    title: 'Web Accessibility for Developers: Building Inclusive Applications',
+    slug: 'web-accessibility-building-inclusive-applications',
+    excerpt: 'From semantic HTML to keyboard navigation and automated testing, practical patterns to build accessible React and web applications everyone can use.',
+    content: `# Web Accessibility for Developers: Building Inclusive Applications
+
+Web accessibility is not a checklist you apply at the end of a project. It is the practice of building applications that everyone can use, including the roughly 15 percent of the world living with a disability. When you get accessibility right, you improve usability for all users and widen the audience that can read, navigate, and interact with your work.
+
+This article walks through the foundations of accessibility and gives concrete, actionable code patterns you can adopt in a React or plain-HTML codebase.
+
+## The Four Foundations of Accessibility (POUR)
+
+The Web Content Accessibility Guidelines group requirements into four principles. Everything you build should be Perceivable, Operable, Understandable, and Robust.
+
+### Perceivable
+
+Information and user interface components must be presentable to users in ways they can perceive.
+
+- Always provide text alternatives (alt attributes) for images.
+- Ensure sufficient color contrast. The recommended ratio is at least 4.5 to 1 for normal text and 3 to 1 for large text.
+- Do not rely on color alone to convey meaning.
+
+\`\`\`html
+<!-- Good: alt text and a visible label -->
+<button type="button" aria-label="Close dialog">
+  <svg aria-hidden="true" focusable="false" width="16" height="16">
+    <line x1="3" y1="3" x2="13" y2="13" />
+  </svg>
+</button>
+\`\`\`
+
+### Operable
+
+User interface components and navigation must be operable by everyone.
+
+- Make sure all functionality is reachable from a keyboard.
+- Give every interactive element a visible focus indicator.
+- Provide enough time for users to read and use content.
+
+### Understandable
+
+Information and the operation of user interface components must be understandable.
+
+- Use clear and predictable labels and headings.
+- Group related form fields and label them.
+- Avoid jargon and abbreviations, or expand them on first use.
+
+### Robust
+
+Content must be robust enough to be interpreted reliably by a variety of user agents, including assistive technologies.
+
+- Use semantic HTML.
+- Validate your markup.
+- Write in a way that allows assistive technologies to parse and interpret your content.
+
+## Practical Focus-Management Patterns
+
+A common accessibility bug is losing focus after a route change or a modal close. Restore focus predictably:
+
+\`\`\`javascript
+// Focus the dialog when it opens, restore focus when it closes
+function useFocusReturn(dialogRef) {
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    dialogRef.current?.focus();
+    return () => {
+      previouslyFocused?.focus?.();
+    };
+  }, []);
+}
+\`\`\`
+
+## Keyboard-Navigable Menus
+
+Menus and dropdowns often break keyboard navigation. The key behaviors are: arrow keys move between options, Escape closes, and Tab moves to the next focusable element after the widget.
+
+\`\`\`javascript
+// Minimal roving tabindex for a listbox
+function ListBox({ options }) {
+  const [focusedIndex, setFocusedIndex] = useState(0);
+
+  // ...keydown handling for ArrowDown, ArrowUp, Home, End...
+}
+\`\`\`
+
+## Testing Your Work
+
+- Use automated tools such as axe-core in your test suite and pull requests.
+- Navigate the app with a keyboard only.
+- Test with a screen reader such as NVDA, VoiceOver, or Narrator.
+
+\`\`\`javascript
+// Jest plus axe example
+test("login form is accessible", async () => {
+  const { container } = render(<LoginForm />);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+\`\`\`
+
+## Conclusion
+
+Accessibility is a team responsibility, not an afterthought. Start with semantic HTML, add keyboard support and focus management, test with automated tools and real assistive technology, and make accessibility part of your definition of done. Small improvements compound into a much more inclusive product.
+`,
+    coverImage: 'https://img.heroui.chat/image/dashboard?w=800&h=450&u=blog-9',
+    tags: ['Accessibility', 'Web Development', 'React'],
+    publishedAt: '2025-02-09',
+    status: 'published',
+    readingTime: 11
   }
 ];
