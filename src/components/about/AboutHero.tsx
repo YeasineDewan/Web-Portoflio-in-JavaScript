@@ -54,11 +54,11 @@ export const AboutHero = () => {
             className="order-1 lg:order-2"
           >
               <div className="relative w-full">
-                <div className="relative aspect-[4/5]">
+                <div className="relative aspect-[3/4]">
                   <img
                     src="/img/about_hero_img.png"
                     alt="Yeasine Dewan - Professional Portrait"
-                    className="w-full h-full object-cover object-bottom"
+                    className="w-full h-full object-cover"
                   />
                 </div>
 
