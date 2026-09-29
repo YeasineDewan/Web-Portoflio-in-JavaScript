@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardBody } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
@@ -6,9 +5,25 @@ import { motion } from 'framer-motion';
 export const Experience = () => {
   const experiences = [
     {
+      company: 'Medigo Healthcare',
+      role: 'IT Officer & Radiologist',
+      period: '25 January, 2026 - 05 July, 2026',
+      address: 'Bangla Motor, Dhaka',
+      achievements: [
+        'Assisted with radiology imaging operations',
+        'Supported doctors, healthcare professionals, and patient services',
+        'Managed website development and maintenance',
+        'Handled social media management and digital presence',
+        'Provided administrative and technical IT support'
+      ],
+      icon: 'lucide:hospital',
+      color: 'danger'
+    },
+    {
       company: 'Wave 3 Limited',
       role: 'Lead Web Developer',
       period: 'Feb 2025 – Present',
+      address: '',
       achievements: [
         'Built and maintained secure web apps end‑to‑end; led code reviews and team rituals',
         'Ownership of security oversight, vulnerability management, penetration testing',
@@ -22,6 +37,7 @@ export const Experience = () => {
       company: 'Cantonment Election Commission',
       role: 'Data Entry Officer',
       period: 'Apr 2024 – Feb 2025',
+      address: '',
       achievements: [
         'Accurate bilingual data entry (English/Bangla), verification, confidentiality, and on‑time completion'
       ],
@@ -32,6 +48,7 @@ export const Experience = () => {
       company: 'Sesame Street',
       role: 'Event Management',
       period: 'Nov 2023 – Jan 2024',
+      address: '',
       achievements: [
         'Logistics and on‑site coordination, cross‑team communication'
       ],
@@ -42,6 +59,7 @@ export const Experience = () => {
       company: 'Shirt Bazar',
       role: 'Computer Operator',
       period: 'May 2023 – Oct 2023',
+      address: '',
       achievements: [
         'Data entry supervision and system operation'
       ],
@@ -62,7 +80,7 @@ export const Experience = () => {
           <div className="space-y-12">
             {experiences.map((exp, index) => (
               <motion.div
-                key={exp.company}
+                key={`${exp.company}-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -81,7 +99,7 @@ export const Experience = () => {
                       <div className={`w-3 h-3 rounded-full bg-${exp.color}-500`}></div>
                     </div>
                     
-                    <Card className={`card-hover ${index % 2 === 0 ? 'md:ml-auto' : ''}`}>
+                    <Card className="card-hover">
                       <CardBody className="p-6">
                         <div className="flex items-center gap-3 mb-4">
                           <div className={`w-10 h-10 rounded-full bg-${exp.color}-100 dark:bg-${exp.color}-900/30 flex items-center justify-center`}>
@@ -93,6 +111,12 @@ export const Experience = () => {
                           <div>
                             <h3 className="text-xl font-semibold">{exp.role}</h3>
                             <p className="text-foreground-500">{exp.company}</p>
+                            {exp.address && (
+                              <div className="flex items-center gap-1 mt-1">
+                                <Icon icon="lucide:map-pin" className="text-sm text-foreground-400" />
+                                <span className="text-sm text-foreground-500">{exp.address}</span>
+                              </div>
+                            )}
                           </div>
                         </div>
                         
