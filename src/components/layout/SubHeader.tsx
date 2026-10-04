@@ -10,9 +10,9 @@ export const SubHeader = () => {
     { name: 'Facebook', icon: 'logos:facebook', url: 'https://www.facebook.com/yeasinedewan.shawon.5' },
     { name: 'LinkedIn', icon: 'logos:linkedin-icon', url: 'https://www.linkedin.com/in/md-yeasine-dewan-shawon-07a383210/' },
     { name: 'GitHub', icon: 'logos:github-icon', url: 'https://github.com/YeasineDewan' },
-    { name: 'WhatsApp', icon: 'logos:whatsapp', url: 'https://wa.me/8801793244543' },
+    { name: 'WhatsApp', icon: 'simple-icons:whatsapp', url: 'https://wa.me/8801793244543' },
     // TODO: replace '#' with your real Discord profile/invite URL
-    { name: 'Discord', icon: 'logos:discord', url: '#' }
+    { name: 'Discord', icon: 'simple-icons:discord', url: '#' }
   ];
 
   return (
@@ -48,13 +48,10 @@ export const SubHeader = () => {
               key={link.name}
               href={link.url}
               isExternal
-              className="text-foreground-500 hover:text-primary transition-colors"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-divider bg-content1 text-foreground-500 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary"
               aria-label={link.name}
             >
-              <Icon
-                icon={link.icon}
-                className={link.name === 'WhatsApp' || link.name === 'Discord' ? 'text-[0.875rem]' : 'text-lg'}
-              />
+              <Icon icon={link.icon} className="text-[17px]" />
             </Link>
           ))}
         </div>
