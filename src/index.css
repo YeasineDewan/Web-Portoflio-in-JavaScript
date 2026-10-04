@@ -14,7 +14,7 @@ body {
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-secondary-600;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-700;
 }
 
 .section-padding {
