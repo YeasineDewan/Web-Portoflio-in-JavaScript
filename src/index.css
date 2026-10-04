@@ -11,6 +11,12 @@
 html,
 body {
   scroll-behavior: smooth;
+  background-color: #FDF8F8;
+}
+
+.dark body,
+.dark html {
+  background-color: #0a0a0a;
 }
 
 .gradient-text {

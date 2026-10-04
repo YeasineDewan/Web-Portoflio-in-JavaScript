@@ -48,28 +48,29 @@ export default {
         // ─── LIGHT MODE ───────────────────────────────────────────
         light: {
           colors: {
-            background: { DEFAULT: "#FFFFFF" },
+            // Warm off-white base — subtle red tint ties to #FF3131 brand
+            background: { DEFAULT: "#FDF8F8" },
 
-            content1: { DEFAULT: "#FFFFFF",  foreground: "#0a0a0a" },
-            content2: { DEFAULT: "#F7F7F7",  foreground: "#0a0a0a" },
-            content3: { DEFAULT: "#EFEFEF",  foreground: "#0a0a0a" },
-            content4: { DEFAULT: "#E4E4E4",  foreground: "#0a0a0a" },
+            content1: { DEFAULT: "#FDF8F8",  foreground: "#1A0A0A" },  // page-level cards
+            content2: { DEFAULT: "#F7EFEF",  foreground: "#1A0A0A" },  // subtle card bg
+            content3: { DEFAULT: "#EFE5E5",  foreground: "#1A0A0A" },  // input bg, tags
+            content4: { DEFAULT: "#E5D8D8",  foreground: "#1A0A0A" },  // borders, chips
 
-            divider: { DEFAULT: "rgba(198,195,195,0.5)" },
+            divider: { DEFAULT: "rgba(209,0,0,0.12)" },               // red-tinted divider
             focus:   { DEFAULT: "#FF3131" },
 
             foreground: {
-              50:      "#F7F7F7",
-              100:     "#EFEFEF",
-              200:     "#E4E4E4",
-              300:     "#C6C3C3",
-              400:     "#A09D9D",
-              500:     "#7A7777",
-              600:     "#555252",
-              700:     "#333131",
-              800:     "#1A1818",
-              900:     "#0a0a0a",
-              DEFAULT: "#0a0a0a",
+              50:      "#F7EFEF",
+              100:     "#EFE5E5",
+              200:     "#E0CECE",
+              300:     "#C6B0B0",
+              400:     "#A08888",
+              500:     "#7A6060",
+              600:     "#554040",
+              700:     "#332525",
+              800:     "#1A1010",
+              900:     "#0D0505",
+              DEFAULT: "#1A0A0A",
             },
 
             // Primary — #FF3131 brand red
