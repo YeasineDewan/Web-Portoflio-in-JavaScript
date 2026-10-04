@@ -43,14 +43,15 @@ export const Navbar = () => {
 
   return (
     <HeroNavbar 
-      isBlurred
-      maxWidth="xl"
-      className="bg-content4/90 dark:bg-content1/90 backdrop-blur-md rounded-full shadow-xl border border-divider"
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+      maxWidth="full"
+      className="w-full min-h-[72px] bg-transparent px-3 sm:px-5 rounded-none shadow-none border-0"
     >
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
+          className="lg:hidden"
         />
         <NavbarBrand>
           <RouterLink to="/" className="flex items-center gap-2">
@@ -62,7 +63,7 @@ export const Navbar = () => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden lg:flex gap-4" justify="center">
         {navItems.map((item) => (
           <NavbarItem key={item.path} isActive={isActive(item.path)}>
             <Link 
@@ -78,10 +79,10 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="hidden sm:flex">
+        <NavbarItem className="hidden lg:flex">
           <ThemeSwitcher />
         </NavbarItem>
-        <NavbarItem className="hidden sm:flex">
+        <NavbarItem className="hidden lg:flex">
           <LanguageSwitcher />
         </NavbarItem>
         <NavbarItem>
@@ -91,12 +92,12 @@ export const Navbar = () => {
             color="primary"
             variant="flat"
             startContent={<Icon icon="lucide:message-square" />}
-            className="hidden sm:flex"
+            className="hidden lg:flex"
           >
             Hire Me
           </Button>
           <Dropdown placement="bottom-end">
-            <DropdownTrigger className="sm:hidden">
+            <DropdownTrigger className="lg:hidden">
               <Button isIconOnly variant="light" radius="full">
                 <Icon icon="lucide:more-vertical" className="text-lg" />
               </Button>

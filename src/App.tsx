@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { useTheme } from '@heroui/use-theme';
 import { Navbar } from './components/layout/Navbar';
+import { SubHeader } from './components/layout/SubHeader';
 import { Footer } from './components/layout/Footer';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
@@ -28,7 +29,12 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <Navbar />
+      <div className="w-full">
+        <div className="w-full border border-divider rounded-full bg-content1 shadow-md">
+          <SubHeader />
+          <Navbar />
+        </div>
+      </div>
       <main className="flex-grow">
         <ScrollToTop />
         <Switch>
