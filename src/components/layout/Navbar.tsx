@@ -46,7 +46,7 @@ export const Navbar = () => {
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
       maxWidth="full"
-      className="w-full min-h-[72px] bg-transparent px-3 sm:px-5 rounded-none shadow-none border-0"
+      className="w-full min-h-[72px] bg-transparent px-3 sm:px-5 rounded-b-full shadow-none border-0"
     >
       <NavbarContent>
         <NavbarMenuToggle
