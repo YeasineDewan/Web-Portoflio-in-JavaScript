@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Link, Divider } from '@heroui/react';
 import { Icon } from '@iconify/react';
@@ -33,21 +32,20 @@ export const Footer = () => {
   return (
     <footer className="mt-16 border-t border-divider bg-content2/70">
       <div className="container-custom py-14 md:py-16">
-        <div className="grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.8fr_1fr_1.2fr]">
-          {/* Brand Column */}
-          <div className="flex flex-col items-start gap-4">
+        <div className="grid grid-cols-1 gap-x-10 gap-y-12 text-center sm:grid-cols-2 sm:text-left lg:grid-cols-[1.35fr_0.8fr_1fr_1.2fr]">
+          <div className="flex flex-col items-center gap-4 sm:items-start">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white shadow-sm">
                 <Icon icon="lucide:shield-check" className="text-xl" />
               </div>
               <span className="text-lg font-semibold">Yeasine Dewan</span>
             </div>
-            <p className="mt-1 max-w-sm text-sm leading-6 text-foreground-500">
+            <p className="max-w-sm text-sm leading-6 text-foreground-500">
               Full-stack developer and security-minded engineer building and hardening web applications.
             </p>
-            <div className="mt-1 flex flex-wrap gap-2.5">
+            <div className="mt-1 flex flex-wrap justify-center gap-2.5 sm:justify-start">
               {socialLinks.map((link) => (
-                <Link 
+                <Link
                   key={link.name}
                   href={link.url}
                   isExternal
@@ -60,17 +58,16 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Navigation Links */}
-          <div>
+          <div className="flex flex-col items-center sm:items-start">
             <h3 className="mb-5 text-sm font-semibold">Navigation</h3>
             <ul className="space-y-3">
               {navLinks.map((link) => (
                 <li key={link.path}>
-                  <Link 
-                    as={RouterLink} 
+                  <Link
+                    as={RouterLink}
                     to={link.path}
                     color="foreground"
-                    className="group flex items-center gap-3 text-sm text-foreground-500 transition-colors hover:text-primary"
+                    className="group flex items-center justify-center gap-3 text-sm text-foreground-500 transition-colors hover:text-primary sm:justify-start"
                   >
                     <Icon icon={link.icon} className="shrink-0 text-base text-foreground-400 transition-colors group-hover:text-primary" />
                     <span>{link.name}</span>
@@ -80,17 +77,16 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Services Links */}
-          <div>
+          <div className="flex flex-col items-center sm:items-start">
             <h3 className="mb-5 text-sm font-semibold">Services</h3>
             <ul className="space-y-3">
               {serviceLinks.map((link) => (
                 <li key={link.path}>
-                  <Link 
-                    as={RouterLink} 
+                  <Link
+                    as={RouterLink}
                     to={link.path}
                     color="foreground"
-                    className="group flex items-center gap-3 text-sm text-foreground-500 transition-colors hover:text-primary"
+                    className="group flex items-center justify-center gap-3 text-sm text-foreground-500 transition-colors hover:text-primary sm:justify-start"
                   >
                     <Icon icon={link.icon} className="shrink-0 text-base text-foreground-400 transition-colors group-hover:text-primary" />
                     <span>{link.name}</span>
@@ -100,21 +96,20 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Info */}
-          <div>
+          <div className="flex flex-col items-center sm:items-start">
             <h3 className="mb-5 text-sm font-semibold">Get in touch</h3>
             <ul className="space-y-4 text-sm">
-              <li className="flex items-start gap-3">
+              <li className="flex items-start justify-center gap-3 text-center sm:justify-start sm:text-left">
                 <Icon icon="lucide:map-pin" className="mt-0.5 shrink-0 text-primary" />
                 <span className="leading-6 text-foreground-500">1188/2/B, Bank Colony, Barekmolla Mor, 60 Feet, Mirpur, Dhaka, Bangladesh</span>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="flex items-center justify-center gap-3 sm:justify-start">
                 <Icon icon="lucide:mail" className="shrink-0 text-primary" />
                 <Link href="mailto:contact@yeasinedewan.com" className="text-foreground-500 transition-colors hover:text-primary">
                   contact@yeasinedewan.com
                 </Link>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="flex items-center justify-center gap-3 sm:justify-start">
                 <Icon icon="lucide:phone" className="shrink-0 text-primary" />
                 <Link href="https://wa.me/8801793244543" isExternal className="text-foreground-500 transition-colors hover:text-primary">
                   +880 0179-3244543
@@ -125,12 +120,12 @@ export const Footer = () => {
         </div>
 
         <Divider className="my-10" />
-        
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-foreground-500 text-sm">
+
+        <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
+          <p className="text-sm text-foreground-500">
             © {currentYear} MD. Yeasine Dewan Shawon. All rights reserved.
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-4 md:justify-end">
             <Link as={RouterLink} to="/privacy-policy" color="foreground" className="text-sm text-foreground-500">
               Privacy Policy
             </Link>

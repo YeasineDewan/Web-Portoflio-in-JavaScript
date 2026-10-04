@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardBody } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';

@@ -38,14 +38,7 @@ export const SkillsCarousel = () => {
   ];
 
   const [activeIndex, setActiveIndex] = React.useState(0);
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % skillCategories.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [skillCategories.length]);
+  const activeCategory = skillCategories[activeIndex];
 
   return (
     <section className="py-16 bg-content2/50">
@@ -58,10 +51,11 @@ export const SkillsCarousel = () => {
         </div>
 
         <div className="flex justify-center mb-8">
-          <div className="flex gap-2">
+          <div className="flex flex-wrap justify-center gap-2">
             {skillCategories.map((category, index) => (
               <button
                 key={category.name}
+                aria-pressed={activeIndex === index}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   activeIndex === index
                     ? `bg-${category.color}-100 text-${category.color}-700 dark:bg-${category.color}-900/30 dark:text-${category.color}-400`
@@ -76,36 +70,30 @@ export const SkillsCarousel = () => {
           </div>
         </div>
 
-        <div className="relative h-[300px]">
-          {skillCategories.map((category, index) => (
-            <motion.div
-              key={category.name}
-              className="absolute inset-0"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ 
-                opacity: activeIndex === index ? 1 : 0,
-                x: activeIndex === index ? 0 : 50
-              }}
-              transition={{ duration: 0.5 }}
-              style={{ pointerEvents: activeIndex === index ? 'auto' : 'none' }}
-            >
-              <Card className={`h-full border-l-4 border-${category.color}`}>
+        <div className="overflow-x-clip">
+          <motion.div
+            key={activeCategory.name}
+            initial={{ opacity: 0, x: 12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+              <Card className={`min-h-[32rem] border-l-4 border-${activeCategory.color} md:min-h-96 lg:min-h-[22rem]`}>
                 <CardBody className="p-6">
                   <div className="flex items-center gap-3 mb-6">
-                    <div className={`w-12 h-12 rounded-full bg-${category.color}-100 dark:bg-${category.color}-900/30 flex items-center justify-center`}>
+                    <div className={`w-12 h-12 rounded-full bg-${activeCategory.color}-100 dark:bg-${activeCategory.color}-900/30 flex items-center justify-center`}>
                       <Icon 
-                        icon={category.icon} 
-                        className={`text-${category.color}-600 dark:text-${category.color}-400 text-2xl`} 
+                        icon={activeCategory.icon} 
+                        className={`text-${activeCategory.color}-600 dark:text-${activeCategory.color}-400 text-2xl`} 
                       />
                     </div>
-                    <h3 className="text-2xl font-semibold">{category.name}</h3>
+                    <h3 className="text-2xl font-semibold">{activeCategory.name}</h3>
                   </div>
                   
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {category.skills.map((skill) => (
+                    {activeCategory.skills.map((skill) => (
                       <div 
                         key={skill}
-                        className={`p-3 rounded-md bg-${category.color}-50/50 dark:bg-${category.color}-900/10 border border-${category.color}-100 dark:border-${category.color}-900/20 text-center`}
+                        className={`p-3 rounded-md bg-${activeCategory.color}-50/50 dark:bg-${activeCategory.color}-900/10 border border-${activeCategory.color}-100 dark:border-${activeCategory.color}-900/20 text-center`}
                       >
                         <span className="font-medium">{skill}</span>
                       </div>
@@ -113,8 +101,7 @@ export const SkillsCarousel = () => {
                   </div>
                 </CardBody>
               </Card>
-            </motion.div>
-          ))}
+          </motion.div>
         </div>
       </div>
     </section>

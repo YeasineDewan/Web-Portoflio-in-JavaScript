@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardBody, CardFooter, Button, Chip, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Input } from '@heroui/react';
+import { Card, CardBody, CardFooter, Button, Chip, Input } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 import { projects } from '../../data/projects';
+import { ContentArtwork } from '../utils/ContentArtwork';
 
 export const ProjectsGrid = () => {
   const [filter, setFilter] = React.useState('all');
-  const [filteredProjects, setFilteredProjects] = React.useState(projects);
   
   const filters = [
     { key: 'all', name: 'All Projects' },
@@ -18,43 +18,19 @@ export const ProjectsGrid = () => {
   
   // Add search functionality
   const [searchQuery, setSearchQuery] = React.useState('');
-  
-  React.useEffect(() => {
-    if (filter === 'all' && !searchQuery) {
-      setFilteredProjects(projects);
-    } else {
-      let filtered = [...projects];
-      
-      // Filter by category
-      if (filter !== 'all') {
-        filtered = filtered.filter(project => 
-          project.tags.some(tag => tag.toLowerCase().includes(filter))
-        );
-      }
-      
-      // Filter by search query
-      if (searchQuery) {
-        const query = searchQuery.toLowerCase();
-        filtered = filtered.filter(project => 
-          project.title.toLowerCase().includes(query) || 
-          project.description.toLowerCase().includes(query) ||
-          project.tags.some(tag => tag.toLowerCase().includes(query))
-        );
-      }
-      
-      setFilteredProjects(filtered);
-    }
-  }, [filter, searchQuery]);
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const filteredProjects = projects.filter((project) => {
+    const matchesFilter = filter === 'all' || project.tags.some((tag) =>
+      tag.toLowerCase().includes(filter)
+    );
+    const matchesSearch = !normalizedQuery || [
+      project.title,
+      project.description,
+      ...project.tags
+    ].some((value) => value.toLowerCase().includes(normalizedQuery));
 
-  React.useEffect(() => {
-    if (filter === 'all') {
-      setFilteredProjects(projects);
-    } else {
-      setFilteredProjects(projects.filter(project => 
-        project.tags.some(tag => tag.toLowerCase().includes(filter))
-      ));
-    }
-  }, [filter]);
+    return matchesFilter && matchesSearch;
+  });
 
   return (
     <section className="py-16">
@@ -119,10 +95,11 @@ export const ProjectsGrid = () => {
                 <Card className="h-full group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 hover:border-primary/20">
                   <CardBody className="p-0">
                     <div className="relative aspect-video overflow-hidden">
-                      <img
+                      <ContentArtwork
                         src={project.coverImage}
-                        alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        title={project.title}
+                        keywords={`${project.tags.join(' ')} ${project.techStack.join(' ')}`}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       {project.featured && (

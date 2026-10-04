@@ -20,7 +20,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => 
     const extractedHeadings: Heading[] = [];
     const lines = content.split('\n');
     
-    lines.forEach((line, index) => {
+    lines.forEach((line) => {
       if (line.startsWith('# ')) {
         const text = line.substring(2).trim();
         const id = text.toLowerCase().replace(/[^\w]+/g, '-');

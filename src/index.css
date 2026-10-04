@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
@@ -9,7 +8,8 @@
   scrollbar-width: none;
 }
 
-html, body {
+html,
+body {
   scroll-behavior: smooth;
 }
 
@@ -135,11 +135,6 @@ html, body {
   line-height: 1.5;
 }
 
-/* Add smooth scrolling for anchor links */
-html {
-  scroll-behavior: smooth;
-}
-
 /* Add table of contents styles */
 .toc {
   position: sticky;
@@ -173,4 +168,15 @@ html {
 .toc-h3 {
   padding-left: 2rem;
   font-size: 0.8125rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

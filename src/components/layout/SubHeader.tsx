@@ -1,61 +1,57 @@
-import React from 'react';
 import { Link } from '@heroui/react';
 import { Icon } from '@iconify/react';
 
-export const SubHeader = () => {
-  const contactNumber = '+880 0179-3244543';
-  const contactEmail = 'contact@yeasinedewanshawon.com';
+const socialLinks = [
+  { name: 'Facebook', icon: 'logos:facebook',       url: 'https://www.facebook.com/yeasinedewan.shawon.5' },
+  { name: 'LinkedIn', icon: 'logos:linkedin-icon',   url: 'https://www.linkedin.com/in/md-yeasine-dewan-shawon-07a383210/' },
+  { name: 'GitHub',   icon: 'logos:github-icon',     url: 'https://github.com/YeasineDewan' },
+  { name: 'WhatsApp', icon: 'simple-icons:whatsapp', url: 'https://wa.me/8801793244543' },
+];
 
-  const socialLinks = [
-    { name: 'Facebook', icon: 'logos:facebook', url: 'https://www.facebook.com/yeasinedewan.shawon.5' },
-    { name: 'LinkedIn', icon: 'logos:linkedin-icon', url: 'https://www.linkedin.com/in/md-yeasine-dewan-shawon-07a383210/' },
-    { name: 'GitHub', icon: 'logos:github-icon', url: 'https://github.com/YeasineDewan' },
-    { name: 'WhatsApp', icon: 'simple-icons:whatsapp', url: 'https://wa.me/8801793244543' },
-    // TODO: replace '#' with your real Discord profile/invite URL
-    { name: 'Discord', icon: 'simple-icons:discord', url: '#' }
-  ];
+export const SubHeader = () => (
+  <div className="w-full border-b border-divider/60 bg-content2/40">
+    <div className="flex h-8 items-center justify-between px-4 sm:px-5">
 
-  return (
-    <div className="w-full border-b border-divider bg-transparent">
-      <div className="min-h-11 flex items-center justify-between gap-4 px-4 sm:px-6">
-        {/* Left: Contact (phone + email) */}
-        <div className="flex min-w-0 items-center gap-3 sm:gap-4">
-          <a
-            href="https://wa.me/8801793244543"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-foreground-600 hover:text-primary transition-colors"
-            aria-label="Contact via WhatsApp"
-          >
-            <Icon icon="lucide:phone" className="shrink-0 text-primary text-sm" />
-            <span className="hidden sm:inline">{contactNumber}</span>
-          </a>
-          <span className="hidden lg:block w-px h-4 bg-divider" />
-          <a
-            href={`mailto:${contactEmail}`}
-            className="hidden lg:flex items-center gap-2 text-sm text-foreground-600 hover:text-primary transition-colors"
-            aria-label="Email me"
-          >
-            <Icon icon="lucide:mail" className="shrink-0 text-primary text-sm" />
-            <span>{contactEmail}</span>
-          </a>
-        </div>
+      {/* Left — phone & mail icons always, text on md+ */}
+      <div className="flex items-center gap-3">
+        <a
+          href="https://wa.me/8801793244543"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Call via WhatsApp"
+          className="group flex items-center gap-1.5 text-foreground-500 hover:text-primary transition-colors"
+        >
+          <Icon icon="lucide:phone" className="text-primary shrink-0" width={12} height={12} />
+          <span className="hidden md:inline text-[11px] font-medium">+880 0179-3244543</span>
+        </a>
 
-        {/* Right: Social Icons */}
-        <div className="flex shrink-0 items-center gap-3">
-          {socialLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.url}
-              isExternal
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-divider bg-content1 text-foreground-500 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary"
-              aria-label={link.name}
-            >
-              <Icon icon={link.icon} className="text-[17px]" />
-            </Link>
-          ))}
-        </div>
+        <span className="hidden md:block w-px h-3 bg-divider" />
+
+        <a
+          href="mailto:contact@yeasinedewan.com"
+          aria-label="Send email"
+          className="group flex items-center gap-1.5 text-foreground-500 hover:text-primary transition-colors"
+        >
+          <Icon icon="lucide:mail" className="text-primary shrink-0" width={12} height={12} />
+          <span className="hidden md:inline text-[11px] font-medium">contact@yeasinedewan.com</span>
+        </a>
       </div>
+
+      {/* Right — social icons */}
+      <div className="flex items-center gap-0.5">
+        {socialLinks.map((s) => (
+          <Link
+            key={s.name}
+            href={s.url}
+            isExternal
+            aria-label={s.name}
+            className="inline-flex h-6 w-6 items-center justify-center rounded-md text-foreground-400 hover:text-primary hover:bg-primary/10 transition-colors"
+          >
+            <Icon icon={s.icon} width={13} height={13} />
+          </Link>
+        ))}
+      </div>
+
     </div>
-  );
-};
+  </div>
+);

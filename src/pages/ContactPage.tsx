@@ -1,6 +1,5 @@
-import React from 'react';
 import { ContactForm } from '../components/contact/ContactForm';
-import { Button, Card, CardBody, Chip } from '@heroui/react';
+import { Button, Card, CardBody } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 

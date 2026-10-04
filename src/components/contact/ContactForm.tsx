@@ -13,8 +13,7 @@ export const ContactForm = () => {
     consent: false
   });
   const [errors, setErrors] = React.useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [submissionStatus, setSubmissionStatus] = React.useState<'idle' | 'success' | 'error'>('idle');
+  const [submissionStatus, setSubmissionStatus] = React.useState<'idle' | 'draft'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -73,62 +72,29 @@ export const ContactForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
       return;
     }
     
-    setIsSubmitting(true);
-    
-    try {
-      // Replace with your actual Formspree form ID
-      const formspreeUrl = 'https://formspree.io/f/your_form_id';
-      
-      const response = await fetch(formspreeUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        }),
-      });
-      
-      if (!response.ok) {
-        throw new Error('Failed to send message');
-      }
-      
-      setSubmissionStatus('success');
-      addToast({
-        title: "Message Sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
-        color: "success",
-      });
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-        consent: false
-      });
-    } catch (error) {
-      console.error('Error sending message:', error);
-      setSubmissionStatus('error');
-      addToast({
-        title: "Error",
-        description: "Failed to send your message. Please try again later.",
-        color: "danger",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    const emailBody = [
+      `Name: ${formData.name.trim()}`,
+      `Email: ${formData.email.trim()}`,
+      '',
+      formData.message.trim()
+    ].join('\n');
+    const emailUrl = `mailto:contact@yeasinedewan.com?subject=${encodeURIComponent(formData.subject.trim())}&body=${encodeURIComponent(emailBody)}`;
+
+    window.location.href = emailUrl;
+    setSubmissionStatus('draft');
+    setFormData({ name: '', email: '', subject: '', message: '', consent: false });
+    addToast({
+      title: 'Email draft ready',
+      description: 'Review and send your message from your email app.',
+      color: 'success'
+    });
   };
 
   return (
@@ -136,29 +102,31 @@ export const ContactForm = () => {
       <CardBody className="p-6">
         <h3 className="text-2xl font-semibold mb-6">Send Me a Message</h3>
         
-        {submissionStatus === 'success' ? (
+        {submissionStatus === 'draft' ? (
           <div className="text-center py-8">
             <div className="w-16 h-16 bg-success-100 dark:bg-success-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
               <Icon icon="lucide:check" className="text-success-600 dark:text-success-400 text-2xl" />
             </div>
-            <h4 className="text-xl font-semibold mb-2">Message Sent Successfully!</h4>
+            <h4 className="text-xl font-semibold mb-2">Email draft opened</h4>
             <p className="text-foreground-500 mb-6">
-              Thank you for reaching out. I'll get back to you as soon as possible.
+              Review the message in your email app and send it when you are ready.
             </p>
             <Button 
               color="primary" 
               variant="flat"
               onPress={() => setSubmissionStatus('idle')}
             >
-              Send Another Message
+              Compose Another Message
             </Button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Input
+                id="name"
                 label="Your Name"
                 name="name"
+                autoComplete="name"
                 placeholder="John Doe"
                 value={formData.name}
                 onChange={handleChange}
@@ -169,9 +137,11 @@ export const ContactForm = () => {
               />
               
               <Input
+                id="email"
                 label="Email Address"
                 name="email"
                 type="email"
+                autoComplete="email"
                 placeholder="john@example.com"
                 value={formData.email}
                 onChange={handleChange}
@@ -183,8 +153,10 @@ export const ContactForm = () => {
             </div>
             
             <Input
+              id="subject"
               label="Subject"
               name="subject"
+              autoComplete="off"
               placeholder="What's this about?"
               value={formData.subject}
               onChange={handleChange}
@@ -195,8 +167,10 @@ export const ContactForm = () => {
             />
             
             <Textarea
+              id="message"
               label="Message"
               name="message"
+              autoComplete="off"
               placeholder="Your message here..."
               value={formData.message}
               onChange={handleChange}
@@ -207,6 +181,8 @@ export const ContactForm = () => {
             />
             
             <Checkbox
+              id="consent"
+              name="consent"
               isSelected={formData.consent}
               onValueChange={handleCheckboxChange}
               isInvalid={!!errors.consent}
@@ -222,10 +198,9 @@ export const ContactForm = () => {
               color="primary"
               fullWidth
               size="lg"
-              isLoading={isSubmitting}
-              startContent={!isSubmitting && <Icon icon="lucide:send" />}
+              startContent={<Icon icon="lucide:send" />}
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+              Send Message
             </Button>
           </form>
         )}
@@ -241,7 +216,7 @@ export const ContactForm = () => {
             </div>
             <div>
               <p className="text-sm text-foreground-500">Email</p>
-              <p className="font-medium">yeasinedewanshawon@gmail.com</p>
+              <p className="font-medium">contact@yeasinedewan.com</p>
             </div>
           </div>
           

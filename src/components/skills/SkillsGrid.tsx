@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardBody, Progress } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
@@ -92,7 +91,7 @@ export const SkillsGrid = () => {
   return (
     <section className="py-16">
       <div className="container-custom">
-        <h2 className="text-3xl font-bold mb-12 text-center">My Skills</h2>
+        <h1 className="text-3xl font-bold mb-12 text-center">My Skills</h1>
         
         <div className="space-y-16">
           {skillCategories.map((category, categoryIndex) => (

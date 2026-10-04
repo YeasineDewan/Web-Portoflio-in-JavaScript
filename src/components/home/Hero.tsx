@@ -3,6 +3,19 @@ import { Button, Tooltip } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 
+const backgroundParticles = [
+  { size: 68, top: '12%', left: '6%', delay: '0s', duration: '16s' },
+  { size: 100, top: '72%', left: '84%', delay: '2s', duration: '20s' },
+  { size: 86, top: '28%', left: '76%', delay: '4s', duration: '18s' },
+  { size: 112, top: '58%', left: '14%', delay: '1s', duration: '23s' },
+  { size: 64, top: '42%', left: '48%', delay: '3s', duration: '19s' },
+  { size: 130, top: '4%', left: '84%', delay: '0.5s', duration: '25s' },
+  { size: 75, top: '84%', left: '58%', delay: '4.5s', duration: '17s' },
+  { size: 95, top: '22%', left: '32%', delay: '1.5s', duration: '22s' },
+  { size: 110, top: '66%', left: '89%', delay: '2.5s', duration: '21s' },
+  { size: 54, top: '9%', left: '60%', delay: '3.5s', duration: '18s' }
+];
+
 export const Hero = () => {
   return (
     <section className="relative overflow-hidden bg-background py-20 md:py-32">
@@ -18,17 +31,17 @@ export const Hero = () => {
       
       {/* Floating animated particles */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(10)].map((_, i) => (
+        {backgroundParticles.map((particle) => (
           <div 
-            key={i}
+            key={`${particle.top}-${particle.left}`}
             className="absolute rounded-full bg-primary-500/10 dark:bg-primary-400/5 animate-pulse-subtle"
             style={{
-              width: `${Math.random() * 100 + 50}px`,
-              height: `${Math.random() * 100 + 50}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${Math.random() * 10 + 10}s`
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              top: particle.top,
+              left: particle.left,
+              animationDelay: particle.delay,
+              animationDuration: particle.duration
             }}
           />
         ))}

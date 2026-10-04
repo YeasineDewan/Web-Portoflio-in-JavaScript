@@ -1,9 +1,9 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, CardFooter, Button, Chip } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 import { blogPosts } from '../../data/blogPosts';
+import { ContentArtwork } from '../utils/ContentArtwork';
 
 export const RecentBlogPosts = () => {
   // Get only published posts, sorted by date (newest first)
@@ -44,10 +44,11 @@ export const RecentBlogPosts = () => {
               <Card className="h-full card-hover">
                 <CardBody className="p-0">
                   <div className="relative aspect-video">
-                    <img 
-                      src={post.coverImage} 
-                      alt={post.title}
-                      className="w-full h-full object-cover"
+                    <ContentArtwork
+                      src={post.coverImage}
+                      title={post.title}
+                      keywords={post.tags.join(' ')}
+                      className="h-full w-full object-cover"
                     />
                   </div>
                   <div className="p-5">

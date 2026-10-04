@@ -1,4 +1,3 @@
-import React from 'react';
 import { ProjectsGrid } from '../components/projects/ProjectsGrid';
 import { Button, Card, CardBody } from '@heroui/react';
 import { Icon } from '@iconify/react';

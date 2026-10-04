@@ -1,4 +1,3 @@
-import React from 'react';
 import { SkillsGrid } from '../components/skills/SkillsGrid';
 import { ContactCTA } from '../components/home/ContactCTA';
 

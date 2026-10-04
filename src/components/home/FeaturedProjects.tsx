@@ -1,9 +1,9 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, CardFooter, Button, Chip } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 import { projects } from '../../data/projects';
+import { ContentArtwork } from '../utils/ContentArtwork';
 
 export const FeaturedProjects = () => {
   // Get only featured projects
@@ -41,10 +41,11 @@ export const FeaturedProjects = () => {
               <Card className="h-full card-hover">
                 <CardBody className="p-0">
                   <div className="relative aspect-video">
-                    <img 
-                      src={project.coverImage} 
-                      alt={project.title}
-                      className="w-full h-full object-cover"
+                    <ContentArtwork
+                      src={project.coverImage}
+                      title={project.title}
+                      keywords={`${project.tags.join(' ')} ${project.techStack.join(' ')}`}
+                      className="h-full w-full object-cover"
                     />
                     <div className="absolute top-2 right-2">
                       <Chip 

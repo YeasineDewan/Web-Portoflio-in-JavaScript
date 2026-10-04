@@ -1,13 +1,14 @@
-import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button, Chip, Divider, Card, CardBody } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 import { projects } from '../data/projects';
+import { ContentArtwork } from '../components/utils/ContentArtwork';
 
 export const ProjectDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = projects.find(p => p.slug === slug);
+  const galleryImages = project?.images.filter((image) => !image.includes('img.heroui.chat')) ?? [];
   
   if (!project) {
     return (
@@ -88,10 +89,11 @@ export const ProjectDetailPage = () => {
             >
               {/* Main Image */}
               <div className="rounded-lg overflow-hidden mb-8">
-                <img 
-                  src={project.coverImage} 
-                  alt={project.title}
-                  className="w-full h-auto"
+                <ContentArtwork
+                  src={project.coverImage}
+                  title={project.title}
+                  keywords={`${project.tags.join(' ')} ${project.techStack.join(' ')}`}
+                  className="h-full w-full object-cover"
                 />
               </div>
               
@@ -132,15 +134,16 @@ export const ProjectDetailPage = () => {
               </div>
               
               {/* Gallery */}
-              {project.images.length > 0 && (
+              {galleryImages.length > 0 && (
                 <div className="mb-8">
                   <h2 className="text-2xl font-semibold mb-4">Project Gallery</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {project.images.map((image, index) => (
+                    {galleryImages.map((image, index) => (
                       <div key={index} className="rounded-lg overflow-hidden">
-                        <img 
+                        <ContentArtwork
                           src={image} 
-                          alt={`${project.title} screenshot ${index + 1}`}
+                          title={`${project.title} screenshot ${index + 1}`}
+                          keywords={`${project.tags.join(' ')} ${project.techStack.join(' ')}`}
                           className="w-full h-auto"
                         />
                       </div>
@@ -229,10 +232,11 @@ export const ProjectDetailPage = () => {
                 <Card key={relatedProject.id} className="card-hover">
                   <CardBody className="p-0">
                     <div className="aspect-video">
-                      <img 
-                        src={relatedProject.coverImage} 
-                        alt={relatedProject.title}
-                        className="w-full h-full object-cover"
+                      <ContentArtwork
+                        src={relatedProject.coverImage}
+                        title={relatedProject.title}
+                        keywords={`${relatedProject.tags.join(' ')} ${relatedProject.techStack.join(' ')}`}
+                        className="h-full w-full object-cover"
                       />
                     </div>
                     <div className="p-4">

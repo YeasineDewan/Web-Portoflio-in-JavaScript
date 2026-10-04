@@ -21,7 +21,8 @@ export const projects = [
     ],
     tags: ['Frontend', 'JavaScript', 'Portfolio', 'Responsive'],
     featured: true,
-    year: 2024
+    year: 2024,
+    securityNotes: 'Client-side rendering with no sensitive data exposure. No user input handling or authentication required, minimizing attack surface.'
   },
   {
     id: 2,
@@ -45,7 +46,8 @@ export const projects = [
     ],
     tags: ['React', 'TypeScript', 'Portfolio', 'Modern'],
     featured: true,
-    year: 2024
+    year: 2024,
+    securityNotes: 'Static site deployment with secure headers. Contact form submissions sanitized using server-side validation on the receiving endpoint to prevent spam and injection attacks.'
   },
   {
     id: 3,
@@ -69,7 +71,8 @@ export const projects = [
     ],
     tags: ['Full-Stack', 'E-learning', 'MERN', 'Education'],
     featured: true,
-    year: 2023
+    year: 2023,
+    securityNotes: 'User authentication via JWT tokens with HTTP-only cookies. API endpoints protected with rate limiting, JWT validation middleware, and input sanitization to prevent XSS and CSRF attacks.'
   },
   {
     id: 4,
@@ -92,7 +95,8 @@ export const projects = [
     ],
     tags: ['Frontend', 'HTML5', 'CSS3', 'Vanilla JS'],
     featured: false,
-    year: 2023
+    year: 2023,
+    securityNotes: 'Static-only site with no server-side processing or user data handling. All interactions are client-side with no personal information stored or transmitted.'
   },
   {
     id: 5,
@@ -116,7 +120,8 @@ export const projects = [
     ],
     tags: ['E-commerce', 'Full-Stack', 'PHP', 'MySQL'],
     featured: false,
-    year: 2023
+    year: 2023,
+    securityNotes: 'Password hashing with bcrypt, PDO prepared statements to prevent SQL injection, and session-based authentication. Payment data handled via secure gateway without storing card details directly.'
   },
   {
     id: 6,
@@ -140,6 +145,7 @@ export const projects = [
     ],
     tags: ['Full-Stack', 'MERN', 'HR', 'CRM', 'Management'],
     featured: true,
-    year: 2024
+    year: 2024,
+    securityNotes: 'Role-based access control (RBAC) with JWT authentication. Sensitive HR data encrypted at rest in MongoDB, HTTPS enforced, and Socket.io connections secured with token validation to prevent unauthorized access.'
   }
 ];

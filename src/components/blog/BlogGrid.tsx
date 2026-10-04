@@ -4,6 +4,7 @@ import { Card, CardBody, CardFooter, Button, Chip, Input } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 import { blogPosts } from '../../data/blogPosts';
+import { ContentArtwork } from '../utils/ContentArtwork';
 
 export const BlogGrid = () => {
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -132,10 +133,11 @@ export const BlogGrid = () => {
                 <Card className="h-full card-hover">
                   <CardBody className="p-0">
                     <div className="relative aspect-video">
-                      <img 
-                        src={post.coverImage} 
-                        alt={post.title}
-                        className="w-full h-full object-cover"
+                      <ContentArtwork
+                        src={post.coverImage}
+                        title={post.title}
+                        keywords={post.tags.join(' ')}
+                        className="h-full w-full object-cover"
                       />
                     </div>
                     <div className="p-5">

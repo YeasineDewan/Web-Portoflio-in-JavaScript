@@ -1,4 +1,3 @@
-import React from 'react';
 import { BlogGrid } from '../components/blog/BlogGrid';
 import { ContactCTA } from '../components/home/ContactCTA';
 

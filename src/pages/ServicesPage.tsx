@@ -1,4 +1,3 @@
-import React from 'react';
 import { ServicesDetail } from '../components/services/ServicesDetail';
 import { ContactCTA } from '../components/home/ContactCTA';
 

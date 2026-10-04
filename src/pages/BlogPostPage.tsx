@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button, Chip, Divider, Card, CardBody } from '@heroui/react';
 import { Icon } from '@iconify/react';
@@ -6,6 +5,7 @@ import { motion } from 'framer-motion';
 import { blogPosts } from '../data/blogPosts';
 import { TableOfContents } from '../components/blog/TableOfContents';
 import { CodeBlock } from '../components/utils/CodeBlock';
+import { ContentArtwork } from '../components/utils/ContentArtwork';
 
 export const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -171,10 +171,11 @@ export const BlogPostPage = () => {
       <div className="container-custom py-8">
         <div className="max-w-4xl mx-auto">
           <div className="rounded-lg overflow-hidden mb-8">
-            <img 
-              src={post.coverImage} 
-              alt={post.title}
-              className="w-full h-auto"
+            <ContentArtwork
+              src={post.coverImage}
+              title={post.title}
+              keywords={post.tags.join(' ')}
+              className="h-full w-full object-cover"
             />
           </div>
         </div>
@@ -262,9 +263,10 @@ export const BlogPostPage = () => {
                   <CardBody className="p-6">
                     <div className="flex flex-col items-center text-center">
                       <div className="w-20 h-20 rounded-full overflow-hidden mb-4">
-                        <img 
-                          src="https://img.heroui.chat/image/avatar?w=200&h=200&u=yeasine-avatar" 
-                          alt="Yeasine Dewan" 
+                        <img
+                          src="/img/about_hero_img.png"
+                          alt="Yeasine Dewan"
+                          loading="lazy"
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -337,10 +339,11 @@ export const BlogPostPage = () => {
                 <Card key={relatedPost.id} className="card-hover">
                   <CardBody className="p-0">
                     <div className="aspect-video">
-                      <img 
-                        src={relatedPost.coverImage} 
-                        alt={relatedPost.title}
-                        className="w-full h-full object-cover"
+                      <ContentArtwork
+                        src={relatedPost.coverImage}
+                        title={relatedPost.title}
+                        keywords={relatedPost.tags.join(' ')}
+                        className="h-full w-full object-cover"
                       />
                     </div>
                     <div className="p-4">

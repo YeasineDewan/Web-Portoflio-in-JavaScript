@@ -1,4 +1,3 @@
-import React from 'react';
 import { CertificationGrid } from '../components/certifications/CertificationGrid';
 import { ContactCTA } from '../components/home/ContactCTA';
 

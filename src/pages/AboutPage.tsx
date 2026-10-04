@@ -1,4 +1,3 @@
-import React from 'react';
 import { AboutHero } from '../components/about/AboutHero';
 import { Experience } from '../components/about/Experience';
 import { Education } from '../components/about/Education';
