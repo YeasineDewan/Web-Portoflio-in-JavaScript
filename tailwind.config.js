@@ -48,29 +48,29 @@ export default {
         // ─── LIGHT MODE ───────────────────────────────────────────
         light: {
           colors: {
-            // Warm off-white base — subtle red tint ties to #FF3131 brand
-            background: { DEFAULT: "#FDF8F8" },
+            // Ash/slate base light mode
+            background: { DEFAULT: "#F0F0F0" },
 
-            content1: { DEFAULT: "#FDF8F8",  foreground: "#1A0A0A" },  // page-level cards
-            content2: { DEFAULT: "#F7EFEF",  foreground: "#1A0A0A" },  // subtle card bg
-            content3: { DEFAULT: "#EFE5E5",  foreground: "#1A0A0A" },  // input bg, tags
-            content4: { DEFAULT: "#E5D8D8",  foreground: "#1A0A0A" },  // borders, chips
+            content1: { DEFAULT: "#F0F0F0",  foreground: "#0a0a0a" },
+            content2: { DEFAULT: "#E8E8E8",  foreground: "#0a0a0a" },
+            content3: { DEFAULT: "#DEDEDE",  foreground: "#0a0a0a" },
+            content4: { DEFAULT: "#D2D2D2",  foreground: "#0a0a0a" },
 
-            divider: { DEFAULT: "rgba(209,0,0,0.12)" },               // red-tinted divider
+            divider: { DEFAULT: "rgba(0,0,0,0.1)" },
             focus:   { DEFAULT: "#FF3131" },
 
             foreground: {
-              50:      "#F7EFEF",
-              100:     "#EFE5E5",
-              200:     "#E0CECE",
-              300:     "#C6B0B0",
-              400:     "#A08888",
-              500:     "#7A6060",
-              600:     "#554040",
-              700:     "#332525",
-              800:     "#1A1010",
-              900:     "#0D0505",
-              DEFAULT: "#1A0A0A",
+              50:      "#E8E8E8",
+              100:     "#DEDEDE",
+              200:     "#CACACA",
+              300:     "#ADADAD",
+              400:     "#8A8A8A",
+              500:     "#666666",
+              600:     "#444444",
+              700:     "#2A2A2A",
+              800:     "#1A1A1A",
+              900:     "#0a0a0a",
+              DEFAULT: "#0a0a0a",
             },
 
             // Primary — #FF3131 brand red
