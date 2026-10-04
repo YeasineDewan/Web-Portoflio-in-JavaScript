@@ -48,27 +48,26 @@ export default {
         // ─── LIGHT MODE ───────────────────────────────────────────
         light: {
           colors: {
-            // Ash/slate base light mode
-            background: { DEFAULT: "#F0F0F0" },
+            background: { DEFAULT: "#e3e3e3" },
 
-            content1: { DEFAULT: "#F0F0F0",  foreground: "#0a0a0a" },
-            content2: { DEFAULT: "#E8E8E8",  foreground: "#0a0a0a" },
-            content3: { DEFAULT: "#DEDEDE",  foreground: "#0a0a0a" },
-            content4: { DEFAULT: "#D2D2D2",  foreground: "#0a0a0a" },
+            content1: { DEFAULT: "#e3e3e3",  foreground: "#0a0a0a" },
+            content2: { DEFAULT: "#cacaca",  foreground: "#0a0a0a" },
+            content3: { DEFAULT: "#929292",  foreground: "#0a0a0a" },
+            content4: { DEFAULT: "#707070",  foreground: "#ffffff" },
 
-            divider: { DEFAULT: "rgba(0,0,0,0.1)" },
+            divider: { DEFAULT: "rgba(0,0,0,0.12)" },
             focus:   { DEFAULT: "#FF3131" },
 
             foreground: {
-              50:      "#E8E8E8",
-              100:     "#DEDEDE",
-              200:     "#CACACA",
-              300:     "#ADADAD",
-              400:     "#8A8A8A",
-              500:     "#666666",
-              600:     "#444444",
-              700:     "#2A2A2A",
-              800:     "#1A1A1A",
+              50:      "#e3e3e3",
+              100:     "#cacaca",
+              200:     "#929292",
+              300:     "#707070",
+              400:     "#585858",
+              500:     "#414141",
+              600:     "#2e2e2e",
+              700:     "#1f1f1f",
+              800:     "#141414",
               900:     "#0a0a0a",
               DEFAULT: "#0a0a0a",
             },
