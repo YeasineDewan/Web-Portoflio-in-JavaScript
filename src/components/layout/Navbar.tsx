@@ -148,7 +148,7 @@ export const Navbar = () => {
       {/* ── Desktop Navbar (lg+) ─────────────────────────────────── */}
       <HeroNavbar
         maxWidth="full"
-        className="hidden lg:flex bg-transparent shadow-none h-14"
+        className="hidden lg:flex shadow-none h-14 bg-[#eae7e8] dark:bg-transparent"
       >
         <NavbarContent>
           <NavbarBrand>
@@ -156,7 +156,7 @@ export const Navbar = () => {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary shadow-sm">
                 <Icon icon="lucide:shield-check" className="text-white text-base" />
               </div>
-              <span className="font-semibold text-sm tracking-tight">Yeasine Dewan</span>
+              <span className="font-semibold text-sm tracking-tight text-[#0a0a0a] dark:text-white">Yeasine Dewan</span>
             </RouterLink>
           </NavbarBrand>
         </NavbarContent>
@@ -169,8 +169,8 @@ export const Navbar = () => {
                 to={item.path}
                 className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
                   isActive(item.path)
-                    ? 'text-primary bg-primary/8'
-                    : 'text-foreground-600 hover:text-foreground hover:bg-content2'
+                    ? 'text-primary bg-primary/10'
+                    : 'text-[#414141] hover:text-[#0a0a0a] hover:bg-[#d5cfd1] dark:text-white/75 dark:hover:text-white dark:hover:bg-white/10'
                 }`}
               >
                 {item.name}
@@ -210,20 +210,20 @@ export const Navbar = () => {
       </HeroNavbar>
 
       {/* ── Mobile Navbar (< lg) ─────────────────────────────────── */}
-      <div className="lg:hidden bg-transparent">
+      <div className="lg:hidden bg-[#eae7e8] dark:bg-transparent">
         <div className="flex h-14 items-center justify-between px-4">
           <RouterLink to="/" className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary shadow-sm">
               <Icon icon="lucide:shield-check" className="text-white text-base" />
             </div>
-            <span className="font-semibold text-sm tracking-tight">Yeasine Dewan</span>
+            <span className="font-semibold text-sm tracking-tight text-[#0a0a0a] dark:text-white">Yeasine Dewan</span>
           </RouterLink>
 
           <button
             onClick={() => setOpen(true)}
             aria-label="Open navigation menu"
             aria-expanded={open}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-foreground-600 hover:bg-content2 transition-colors"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-[#414141] hover:bg-[#d5cfd1] dark:text-white/70 dark:hover:bg-white/10 transition-colors"
           >
             <Icon icon="lucide:menu" className="text-xl" />
           </button>

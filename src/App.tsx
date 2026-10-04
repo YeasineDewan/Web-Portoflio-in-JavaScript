@@ -36,7 +36,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <header className="sticky top-0 z-40 w-full px-3 pt-3 sm:px-5">
-        <div className="w-full rounded-2xl border border-divider bg-background/90 backdrop-blur-xl shadow-lg overflow-hidden">
+        <div className="w-full rounded-2xl border border-[#cac3c5] bg-[#eae7e8] backdrop-blur-xl shadow-md overflow-hidden dark:border-white/10 dark:bg-[#141414]">
           <SubHeader />
           <Navbar />
         </div>
