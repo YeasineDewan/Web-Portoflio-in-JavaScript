@@ -97,6 +97,65 @@ body {
   text-wrap: balance;
 }
 
+.site-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.site-background::before,
+.site-background::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.site-background::before {
+  inset: -24%;
+  background-image:
+    linear-gradient(117deg, transparent 18%, rgba(220, 38, 38, 0.035) 32%, transparent 45%),
+    linear-gradient(28deg, transparent 58%, rgba(20, 135, 126, 0.025) 70%, transparent 79%),
+    linear-gradient(160deg, transparent 28%, rgba(220, 38, 38, 0.02) 42%, transparent 55%);
+  background-size: 150% 150%;
+  animation: atmosphere-drift 48s ease-in-out infinite alternate;
+}
+
+.site-background::after {
+  opacity: 0.42;
+  background-image:
+    linear-gradient(rgba(120, 80, 80, 0.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 80, 80, 0.075) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at 50% 42%, #000 8%, transparent 82%);
+  animation: grid-drift 72s linear infinite;
+}
+
+.dark .site-background::before {
+  background-image:
+    linear-gradient(117deg, transparent 18%, rgba(248, 72, 72, 0.075) 32%, transparent 45%),
+    linear-gradient(28deg, transparent 58%, rgba(49, 181, 164, 0.05) 70%, transparent 79%),
+    linear-gradient(160deg, transparent 28%, rgba(248, 72, 72, 0.045) 42%, transparent 55%);
+}
+
+.dark .site-background::after {
+  opacity: 0.34;
+  background-image:
+    linear-gradient(rgba(255, 170, 170, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 170, 170, 0.09) 1px, transparent 1px);
+}
+
+@keyframes atmosphere-drift {
+  from { transform: translate3d(-1.5%, -1%, 0) scale(1); }
+  to { transform: translate3d(1.5%, 1%, 0) scale(1.04); }
+}
+
+@keyframes grid-drift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 72px 72px, 72px 72px; }
+}
+
 /* Add animation for security scan effect */
 @keyframes scan {
   0% {
@@ -184,5 +243,10 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .site-background::before,
+  .site-background::after {
+    animation: none;
   }
 }

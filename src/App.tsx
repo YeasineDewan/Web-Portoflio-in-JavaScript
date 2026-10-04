@@ -34,54 +34,57 @@ function App() {
   }, [theme]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <header className="sticky top-0 z-40 w-full px-3 pt-3 sm:px-5">
-        <div className="w-full rounded-2xl border border-[#cac3c5] bg-[#eae7e8] backdrop-blur-xl shadow-md overflow-hidden dark:border-white/10 dark:bg-[#141414]">
-          <SubHeader />
-          <Navbar />
-        </div>
-      </header>
-      <main className="flex-grow">
-        <ScrollToTop />
-        <AnimatePresence initial={false} mode="wait">
-          <motion.div
-            key={location.pathname}
-            initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
-            transition={{ duration: reduceMotion ? 0 : 0.22, ease: 'easeOut' }}
-          >
-            <React.Suspense
-              fallback={(
-                <div role="status" className="container-custom flex min-h-[40vh] items-center justify-center">
-                  <span className="sr-only">Loading page</span>
-                  <span aria-hidden="true" className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-r-transparent" />
-                </div>
-              )}
+    <div className="site-shell relative isolate min-h-screen bg-transparent text-foreground">
+      <div className="site-background" aria-hidden="true" />
+      <div className="relative z-10 flex min-h-screen flex-col">
+        <header className="sticky top-0 z-40 w-full px-3 pt-3 sm:px-5">
+          <div className="w-full rounded-2xl border border-[#cac3c5] bg-[#eae7e8] backdrop-blur-xl shadow-md overflow-hidden dark:border-white/10 dark:bg-[#141414]">
+            <SubHeader />
+            <Navbar />
+          </div>
+        </header>
+        <main className="flex-grow">
+          <ScrollToTop />
+          <AnimatePresence initial={false} mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={reduceMotion ? false : { opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduceMotion ? undefined : { opacity: 0, y: -4 }}
+              transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Switch location={location}>
-                <Route exact path="/" component={HomePage} />
-                <Route path="/about" component={AboutPage} />
-                <Route path="/skills" component={SkillsPage} />
-                <Route path="/experience" component={ExperiencePage} />
-                <Route exact path="/projects" component={ProjectsPage} />
-                <Route path="/projects/:slug" component={ProjectDetailPage} />
-                <Route exact path="/blog" component={BlogPage} />
-                <Route path="/blog/:slug" component={BlogPostPage} />
-                <Route path="/certifications" component={CertificationsPage} />
-                <Route path="/services" component={ServicesPage} />
-                <Route path="/contact" component={ContactPage} />
-                <Route path="/hire-me" component={HireMePage} />
-                <Route path="/privacy-policy" component={PrivacyPolicyPage} />
-                <Route path="/terms" component={TermsPage} />
-                <Route component={NotFoundPage} />
-              </Switch>
-            </React.Suspense>
-          </motion.div>
-        </AnimatePresence>
-        <ScrollToTopButton />
-      </main>
-      <Footer />
+              <React.Suspense
+                fallback={(
+                  <div role="status" className="container-custom flex min-h-[40vh] items-center justify-center">
+                    <span className="sr-only">Loading page</span>
+                    <span aria-hidden="true" className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-r-transparent" />
+                  </div>
+                )}
+              >
+                <Switch location={location}>
+                  <Route exact path="/" component={HomePage} />
+                  <Route path="/about" component={AboutPage} />
+                  <Route path="/skills" component={SkillsPage} />
+                  <Route path="/experience" component={ExperiencePage} />
+                  <Route exact path="/projects" component={ProjectsPage} />
+                  <Route path="/projects/:slug" component={ProjectDetailPage} />
+                  <Route exact path="/blog" component={BlogPage} />
+                  <Route path="/blog/:slug" component={BlogPostPage} />
+                  <Route path="/certifications" component={CertificationsPage} />
+                  <Route path="/services" component={ServicesPage} />
+                  <Route path="/contact" component={ContactPage} />
+                  <Route path="/hire-me" component={HireMePage} />
+                  <Route path="/privacy-policy" component={PrivacyPolicyPage} />
+                  <Route path="/terms" component={TermsPage} />
+                  <Route component={NotFoundPage} />
+                </Switch>
+              </React.Suspense>
+            </motion.div>
+          </AnimatePresence>
+          <ScrollToTopButton />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }
