@@ -11,7 +11,6 @@ import {
 } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { ThemeSwitcher } from '../utils/ThemeSwitcher';
-import { LanguageSwitcher } from '../utils/LanguageSwitcher';
 
 const navItems = [
   { name: 'Home',       path: '/',           icon: 'lucide:house' },
@@ -103,10 +102,6 @@ export const Navbar = () => {
               <span className="text-sm text-foreground-600 font-medium">Theme</span>
               <ThemeSwitcher />
             </div>
-            <div className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-content2 transition-colors">
-              <span className="text-sm text-foreground-600 font-medium">Language</span>
-              <LanguageSwitcher />
-            </div>
           </div>
         </nav>
 
@@ -177,7 +172,6 @@ export const Navbar = () => {
 
         <NavbarContent justify="end" className="gap-2">
           <NavbarItem><ThemeSwitcher /></NavbarItem>
-          <NavbarItem><LanguageSwitcher /></NavbarItem>
           <NavbarItem>
             <Button
               as="a"
