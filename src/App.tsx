@@ -18,6 +18,7 @@ const BlogPage = React.lazy(() => import('./pages/BlogPage').then(({ BlogPage })
 const BlogPostPage = React.lazy(() => import('./pages/BlogPostPage').then(({ BlogPostPage }) => ({ default: BlogPostPage })));
 const CertificationsPage = React.lazy(() => import('./pages/CertificationsPage').then(({ CertificationsPage }) => ({ default: CertificationsPage })));
 const ServicesPage = React.lazy(() => import('./pages/ServicesPage').then(({ ServicesPage }) => ({ default: ServicesPage })));
+const ServiceDetailPage = React.lazy(() => import('./pages/ServiceDetailPage').then(({ ServiceDetailPage }) => ({ default: ServiceDetailPage })));
 const ContactPage = React.lazy(() => import('./pages/ContactPage').then(({ ContactPage }) => ({ default: ContactPage })));
 const HireMePage = React.lazy(() => import('./pages/HireMePage').then(({ HireMePage }) => ({ default: HireMePage })));
 const PrivacyPolicyPage = React.lazy(() => import('./pages/LegalPages').then(({ PrivacyPolicyPage }) => ({ default: PrivacyPolicyPage })));
@@ -100,7 +101,8 @@ function App() {
                   <Route exact path="/blog" component={BlogPage} />
                   <Route path="/blog/:slug" component={BlogPostPage} />
                   <Route path="/certifications" component={CertificationsPage} />
-                  <Route path="/services" component={ServicesPage} />
+                  <Route exact path="/services" component={ServicesPage} />
+                  <Route path="/services/:slug" component={ServiceDetailPage} />
                   <Route path="/contact" component={ContactPage} />
                   <Route path="/hire-me" component={HireMePage} />
                   <Route path="/privacy-policy" component={PrivacyPolicyPage} />

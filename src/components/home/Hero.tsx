@@ -173,19 +173,19 @@ export const Hero = () => {
               <motion.div whileHover={reduce ? undefined : { scale: 1.04 }} whileTap={reduce ? undefined : { scale: 0.97 }}>
                 <Button
                   as={Link}
-                  to="/projects"
+                  to="/hire-me"
                   color="primary"
                   size="lg"
                   className="shimmer font-semibold shadow-lg shadow-primary/25"
-                  startContent={<Icon icon="lucide:layout-grid" />}
+                  startContent={<Icon icon="lucide:message-square" />}
                 >
-                  View Projects
+                  Hire Me
                 </Button>
               </motion.div>
               <motion.div whileHover={reduce ? undefined : { scale: 1.04 }} whileTap={reduce ? undefined : { scale: 0.97 }}>
                 <Button
                   as={Link}
-                  to="/contact"
+                  to="/hire-me"
                   color="primary"
                   variant="bordered"
                   size="lg"

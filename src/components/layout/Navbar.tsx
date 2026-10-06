@@ -126,7 +126,7 @@ export const Navbar = () => {
           </Button>
           <Button
             as={RouterLink}
-            to="/contact"
+            to="/hire-me"
             color="primary"
             fullWidth
             size="sm"
@@ -194,7 +194,7 @@ export const Navbar = () => {
           <NavbarItem>
             <Button
               as={RouterLink}
-              to="/contact"
+              to="/hire-me"
               color="primary"
               size="sm"
               startContent={<Icon icon="lucide:message-square" className="text-sm" />}

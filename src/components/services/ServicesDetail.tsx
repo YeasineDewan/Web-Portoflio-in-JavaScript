@@ -182,18 +182,33 @@ export const ServicesDetail = () => {
                       ))}
                     </ul>
 
-                    <motion.div whileHover={reduce ? undefined : { scale: 1.04 }} whileTap={reduce ? undefined : { scale: 0.97 }}>
-                      <Button
-                        as={Link}
-                        to="/contact"
-                        color={service.color as any}
-                        size="lg"
-                        className="shimmer font-semibold"
-                        startContent={<Icon icon="lucide:message-square" />}
-                      >
-                        Inquire About This Service
-                      </Button>
-                    </motion.div>
+                    <div className="flex flex-wrap gap-3">
+                      <motion.div whileHover={reduce ? undefined : { scale: 1.04 }} whileTap={reduce ? undefined : { scale: 0.97 }}>
+                        <Button
+                          as={Link}
+                          to={`/services/${service.id}`}
+                          color={service.color as any}
+                          size="lg"
+                          className="shimmer font-semibold"
+                          startContent={<Icon icon="lucide:info" />}
+                        >
+                          View Details & Pricing
+                        </Button>
+                      </motion.div>
+                      <motion.div whileHover={reduce ? undefined : { scale: 1.04 }} whileTap={reduce ? undefined : { scale: 0.97 }}>
+                        <Button
+                          as={Link}
+                          to={`/contact?service=${service.id}`}
+                          color={service.color as any}
+                          variant="bordered"
+                          size="lg"
+                          className="font-semibold"
+                          startContent={<Icon icon="lucide:message-square" />}
+                        >
+                          Inquire About This Service
+                        </Button>
+                      </motion.div>
+                    </div>
                   </motion.div>
 
                   {/* Right: process */}

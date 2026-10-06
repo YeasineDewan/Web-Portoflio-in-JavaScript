@@ -1,8 +1,19 @@
-import { Button, Card, CardBody, Chip } from '@heroui/react';
-import { Icon } from '@iconify/react';
+import { useEffect, useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { Icon } from '@iconify/react';
+import { Button, Card, CardBody, Chip, Accordion, AccordionItem } from '@heroui/react';
 import { ContactForm } from '../components/contact/ContactForm';
-import { PageBackground, PageHero, Section, SectionHeading, stagger, fadeUp, scaleIn } from '../components/utils/PageLayout';
+import { Experience } from '../components/about/Experience';
+import {
+  PageBackground,
+  PageHero,
+  Section,
+  SectionHeading,
+  stagger,
+  fadeUp,
+  scaleIn,
+  CountUp,
+} from '../components/utils/PageLayout';
 
 const pricingPlans = [
   {
@@ -48,8 +59,70 @@ const testimonials = [
   { name: 'Emily Rodriguez', role: 'Product Manager, InnovateCorp', content: 'The web application Yeasine developed for us is not only beautiful but also incredibly secure and performant. Highly recommended!',        rating: 5 },
 ];
 
+const skillBadges = [
+  'React', 'Next.js', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'PostgreSQL',
+  'Tailwind CSS', 'JavaScript', 'Python', 'Docker', 'Nginx', 'Git', 'Linux',
+  'Penetration Testing', 'Web Security', 'SSL/TLS', 'CDN', 'SEO', 'REST APIs',
+];
+
+const faqs = [
+  {
+    question: 'What is your typical project timeline?',
+    answer: 'Timelines vary based on project complexity. A simple landing page takes 1-2 weeks, while a full-stack application may take 4-12 weeks. I provide detailed timelines during our initial consultation.',
+  },
+  {
+    question: 'Do you offer maintenance after launch?',
+    answer: 'Yes, I offer ongoing support and maintenance packages to keep your application secure, up-to-date, and performing optimally after launch.',
+  },
+  {
+    question: 'What technologies do you specialize in?',
+    answer: 'I specialize in the MERN stack (MongoDB, Express, React, Node.js), Next.js, TypeScript, Tailwind CSS, and have deep expertise in web security, penetration testing, and DevOps practices.',
+  },
+  {
+    question: 'How do you handle project communication?',
+    answer: 'I maintain regular communication through email, WhatsApp, and weekly progress calls. You\'ll receive updates at every milestone and have direct access to me throughout the project.',
+  },
+  {
+    question: 'What are your payment terms?',
+    answer: 'I typically work with a 30% upfront deposit, 40% at the midpoint, and 30% upon completion. For ongoing support, payments are billed monthly or per session.',
+  },
+  {
+    question: 'Can you work with existing codebases?',
+    answer: 'Absolutely. I have extensive experience working with legacy codebases, performing security audits, refactoring, and adding new features to existing applications.',
+  },
+];
+
+const stats = [
+  { value: 3, suffix: '+', label: 'Years Experience' },
+  { value: 15, suffix: '+', label: 'Projects Completed' },
+  { value: 99, suffix: '%', label: 'Client Satisfaction' },
+  { value: 24, suffix: '/7', label: 'Support Available' },
+];
+
 export const HireMePage = () => {
   const reduce = useReducedMotion();
+  const marqueeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const marquee = marqueeRef.current;
+    if (!marquee || reduce) return;
+
+    let animationId: number;
+    let position = 0;
+    const speed = 0.5;
+
+    const animate = () => {
+      position -= speed;
+      if (position <= -marquee.scrollWidth / 2) {
+        position = 0;
+      }
+      marquee.style.transform = `translateX(${position}px)`;
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationId);
+  }, [reduce]);
 
   return (
     <PageBackground>
@@ -67,8 +140,56 @@ export const HireMePage = () => {
         </Button>
       </PageHero>
 
-      {/* Process */}
+      {/* Stats */}
+      <Section className="bg-content2/30 border-y border-divider">
+        <div className="container-custom">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+            {stats.map((stat, i) => (
+              <motion.div
+                key={i}
+                variants={reduce ? undefined : fadeUp}
+                className="text-center"
+              >
+                <div className="text-4xl md:text-5xl font-black text-primary mb-2">
+                  <CountUp to={stat.value} suffix={stat.suffix} duration={2} />
+                </div>
+                <p className="text-sm md:text-base text-foreground-500 font-medium">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* Skills Marquee */}
       <Section>
+        <div className="container-custom mb-12">
+          <SectionHeading
+            badge="Tech Stack"
+            title="Skills & "
+            highlight="Technologies"
+            description="A comprehensive toolkit for building secure, high-performance web applications."
+          />
+        </div>
+        <div className="relative overflow-hidden py-4">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+          <div ref={marqueeRef} className="flex gap-4 whitespace-nowrap will-change-transform" style={{ width: 'max-content' }}>
+            {[...skillBadges, ...skillBadges].map((skill, i) => (
+              <Chip
+                key={i}
+                variant="flat"
+                color={i % 3 === 0 ? 'primary' : i % 3 === 1 ? 'secondary' : 'success'}
+                className="h-10 px-4 text-sm font-semibold border border-divider"
+              >
+                {skill}
+              </Chip>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* Process */}
+      <Section className="bg-content2/30">
         <div className="container-custom">
           <SectionHeading
             badge="How It Works"
@@ -86,7 +207,6 @@ export const HireMePage = () => {
                 variants={reduce ? undefined : fadeUp}
                 className="relative text-center group"
               >
-                {/* Connector line */}
                 {index < processSteps.length - 1 && (
                   <div className="hidden md:block absolute top-8 left-[calc(50%+2rem)] right-[-50%] h-px bg-gradient-to-r from-primary/40 to-transparent z-0" />
                 )}
@@ -108,6 +228,9 @@ export const HireMePage = () => {
           </motion.div>
         </div>
       </Section>
+
+      {/* Experience */}
+      <Experience />
 
       {/* Pricing */}
       <Section id="pricing" className="bg-content2/30">
@@ -240,8 +363,40 @@ export const HireMePage = () => {
         </div>
       </Section>
 
+      {/* FAQ */}
+      <Section className="bg-content2/30">
+        <div className="container-custom max-w-4xl">
+          <SectionHeading
+            badge="FAQ"
+            title="Frequently Asked "
+            highlight="Questions"
+            description="Everything you need to know about working with me. Can't find the answer? Reach out directly."
+          />
+          <motion.div variants={reduce ? undefined : fadeUp}>
+            <Accordion variant="splitted" className="gap-3">
+              {faqs.map((faq, i) => (
+                <AccordionItem
+                  key={i}
+                  aria-label={faq.question}
+                  title={
+                    <span className="font-semibold text-sm md:text-base">{faq.question}</span>
+                  }
+                  classNames={{
+                    title: 'text-left',
+                    trigger: 'px-5 py-4 bg-content1/60 border border-content3/50 hover:border-primary/30 rounded-xl',
+                    content: 'px-5 pb-4 text-foreground-500 text-sm leading-relaxed',
+                  }}
+                >
+                  {faq.answer}
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </motion.div>
+        </div>
+      </Section>
+
       {/* Contact */}
-      <Section id="contact" className="bg-content2/30">
+      <Section id="contact">
         <div className="container-custom max-w-4xl">
           <SectionHeading
             badge="Start a Project"
