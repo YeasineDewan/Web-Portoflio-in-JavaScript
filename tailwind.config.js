@@ -48,28 +48,28 @@ export default {
         // ─── LIGHT MODE ───────────────────────────────────────────
         light: {
           colors: {
-            background: { DEFAULT: "#e3e3e3" },
+            background: { DEFAULT: "#f5f5f7" },
 
-            content1: { DEFAULT: "#e3e3e3",  foreground: "#0a0a0a" },
-            content2: { DEFAULT: "#cacaca",  foreground: "#0a0a0a" },
-            content3: { DEFAULT: "#929292",  foreground: "#0a0a0a" },
-            content4: { DEFAULT: "#707070",  foreground: "#ffffff" },
+            content1: { DEFAULT: "#ffffff",  foreground: "#0a0a0a" },
+            content2: { DEFAULT: "#f0f0f2",  foreground: "#0a0a0a" },
+            content3: { DEFAULT: "#e2e2e6",  foreground: "#0a0a0a" },
+            content4: { DEFAULT: "#c8c8ce",  foreground: "#0a0a0a" },
 
-            divider: { DEFAULT: "rgba(0,0,0,0.12)" },
+            divider: { DEFAULT: "rgba(0,0,0,0.08)" },
             focus:   { DEFAULT: "#FF3131" },
 
             foreground: {
-              50:      "#e3e3e3",
-              100:     "#cacaca",
-              200:     "#929292",
-              300:     "#707070",
-              400:     "#585858",
-              500:     "#414141",
-              600:     "#2e2e2e",
-              700:     "#1f1f1f",
-              800:     "#141414",
-              900:     "#0a0a0a",
-              DEFAULT: "#0a0a0a",
+              50:      "#f5f5f7",
+              100:     "#e2e2e6",
+              200:     "#c8c8ce",
+              300:     "#9898a0",
+              400:     "#6e6e78",
+              500:     "#52525c",
+              600:     "#3a3a44",
+              700:     "#26262e",
+              800:     "#18181e",
+              900:     "#0a0a0f",
+              DEFAULT: "#0a0a0f",
             },
 
             // Primary — #FF3131 brand red

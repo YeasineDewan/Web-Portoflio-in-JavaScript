@@ -28,38 +28,67 @@ function App() {
   const { theme } = useTheme();
   const location = useLocation();
   const reduceMotion = useReducedMotion();
-  
+
   React.useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
   }, [theme]);
 
+  // Cursor spotlight
+  const [cursor, setCursor] = React.useState({ x: -999, y: -999 });
+  React.useEffect(() => {
+    if (reduceMotion) return;
+    const move = (e: MouseEvent) => setCursor({ x: e.clientX, y: e.clientY });
+    window.addEventListener('mousemove', move);
+    return () => window.removeEventListener('mousemove', move);
+  }, [reduceMotion]);
+
   return (
     <div className="site-shell relative isolate min-h-screen bg-transparent text-foreground">
       <div className="site-background" aria-hidden="true" />
+
+      {/* Cursor spotlight */}
+      {!reduceMotion && (
+        <motion.div
+          className="pointer-events-none fixed inset-0 z-[1] hidden lg:block"
+          aria-hidden="true"
+          style={{
+            background: `radial-gradient(400px circle at ${cursor.x}px ${cursor.y}px, rgba(220,38,38,0.04) 0%, transparent 70%)`,
+          }}
+        />
+      )}
+
       <div className="relative z-10 flex min-h-screen flex-col">
         <header className="sticky top-0 z-40 w-full px-3 pt-3 sm:px-5">
-          <div className="w-full rounded-2xl border border-[#cac3c5] bg-[#eae7e8] backdrop-blur-xl shadow-md overflow-hidden dark:border-white/10 dark:bg-[#141414]">
+          <motion.div
+            className="w-full rounded-2xl border border-black/[0.07] bg-white/90 backdrop-blur-xl shadow-sm overflow-hidden dark:border-white/10 dark:bg-[#141414]"
+            initial={reduceMotion ? undefined : { opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
             <SubHeader />
             <Navbar />
-          </div>
+          </motion.div>
         </header>
         <main className="flex-grow">
           <ScrollToTop />
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={location.pathname}
-              initial={reduceMotion ? false : { opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduceMotion ? undefined : { opacity: 0, y: -4 }}
-              transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.22, 1, 0.36, 1] }}
+              initial={reduceMotion ? false : { opacity: 0, y: 12, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={reduceMotion ? undefined : { opacity: 0, y: -8, filter: 'blur(2px)' }}
+              transition={{ duration: reduceMotion ? 0 : 0.38, ease: [0.22, 1, 0.36, 1] }}
             >
               <React.Suspense
-                fallback={(
+                fallback={
                   <div role="status" className="container-custom flex min-h-[40vh] items-center justify-center">
                     <span className="sr-only">Loading page</span>
-                    <span aria-hidden="true" className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-r-transparent" />
+                    <div className="relative">
+                      <span aria-hidden="true" className="h-12 w-12 animate-spin rounded-full border-2 border-primary border-r-transparent block" />
+                      <span aria-hidden="true" className="absolute inset-2 h-8 w-8 animate-spin rounded-full border-2 border-secondary border-l-transparent" style={{ animationDirection: 'reverse' }} />
+                    </div>
                   </div>
-                )}
+                }
               >
                 <Switch location={location}>
                   <Route exact path="/" component={HomePage} />

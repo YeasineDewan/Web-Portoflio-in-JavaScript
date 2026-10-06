@@ -1,204 +1,321 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Tooltip } from '@heroui/react';
 import { Icon } from '@iconify/react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
-const backgroundParticles = [
-  { size: 68, top: '12%', left: '6%', delay: '0s', duration: '16s' },
-  { size: 100, top: '72%', left: '84%', delay: '2s', duration: '20s' },
-  { size: 86, top: '28%', left: '76%', delay: '4s', duration: '18s' },
-  { size: 112, top: '58%', left: '14%', delay: '1s', duration: '23s' },
-  { size: 64, top: '42%', left: '48%', delay: '3s', duration: '19s' },
-  { size: 130, top: '4%', left: '84%', delay: '0.5s', duration: '25s' },
-  { size: 75, top: '84%', left: '58%', delay: '4.5s', duration: '17s' },
-  { size: 95, top: '22%', left: '32%', delay: '1.5s', duration: '22s' },
-  { size: 110, top: '66%', left: '89%', delay: '2.5s', duration: '21s' },
-  { size: 54, top: '9%', left: '60%', delay: '3.5s', duration: '18s' }
+const ROLES = ['Full-Stack Engineer', 'Cybersecurity Expert', 'Penetration Tester', 'Web Architect'];
+
+const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
+  id: i,
+  size: 4 + Math.random() * 6,
+  x: Math.random() * 100,
+  y: Math.random() * 100,
+  duration: 4 + Math.random() * 6,
+  delay: Math.random() * 4,
+}));
+
+const BEAMS = [
+  { left: '15%', height: '40%', top: '0', delay: '0s', duration: '4s' },
+  { left: '45%', height: '60%', top: '0', delay: '1.5s', duration: '5s' },
+  { left: '75%', height: '35%', top: '0', delay: '3s', duration: '3.5s' },
 ];
 
+function useTypewriter(words: string[], speed = 80, pause = 1800) {
+  const [display, setDisplay] = React.useState('');
+  const [wordIdx, setWordIdx] = React.useState(0);
+  const [charIdx, setCharIdx] = React.useState(0);
+  const [deleting, setDeleting] = React.useState(false);
+
+  React.useEffect(() => {
+    const word = words[wordIdx];
+    const timeout = setTimeout(() => {
+      if (!deleting) {
+        setDisplay(word.slice(0, charIdx + 1));
+        if (charIdx + 1 === word.length) {
+          setTimeout(() => setDeleting(true), pause);
+        } else {
+          setCharIdx(c => c + 1);
+        }
+      } else {
+        setDisplay(word.slice(0, charIdx - 1));
+        if (charIdx - 1 === 0) {
+          setDeleting(false);
+          setWordIdx(w => (w + 1) % words.length);
+          setCharIdx(0);
+        } else {
+          setCharIdx(c => c - 1);
+        }
+      }
+    }, deleting ? speed / 2 : speed);
+    return () => clearTimeout(timeout);
+  }, [charIdx, deleting, wordIdx, words, speed, pause]);
+
+  return display;
+}
+
 export const Hero = () => {
+  const reduce = useReducedMotion();
+  const role = useTypewriter(ROLES);
+
+  const container = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+  };
+  const item = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+  };
+
   return (
-    <section className="relative overflow-hidden bg-background py-20 md:py-32">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-50/30 to-secondary-50/20 dark:from-primary-900/10 dark:to-secondary-900/5 -z-10" />
-      
-      {/* Enhanced security pattern background with animated particles */}
-      <div className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]" 
-        style={{ 
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` 
-        }}
-      />
-      
-      {/* Floating animated particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        {backgroundParticles.map((particle) => (
-          <div 
-            key={`${particle.top}-${particle.left}`}
-            className="absolute rounded-full bg-primary-500/10 dark:bg-primary-400/5 animate-pulse-subtle"
-            style={{
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-              top: particle.top,
-              left: particle.left,
-              animationDelay: particle.delay,
-              animationDuration: particle.duration
-            }}
-          />
-        ))}
-      </div>
+    <section
+      className="relative overflow-hidden bg-background py-20 md:py-32"
+    >
+      {/* Animated beams */}
+      {!reduce && BEAMS.map((b, i) => (
+        <div
+          key={i}
+          className="beam pointer-events-none absolute"
+          style={{ left: b.left, height: b.height, top: b.top, animationDelay: b.delay, animationDuration: b.duration, width: '1px' }}
+        />
+      ))}
+
+      {/* Particle field */}
+      {!reduce && (
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          {PARTICLES.map(p => (
+            <motion.div
+              key={p.id}
+              className="absolute rounded-full bg-primary/20 dark:bg-primary/50"
+              style={{
+                width: p.size,
+                height: p.size,
+                left: `${p.x}%`,
+                top: `${p.y}%`,
+              }}
+              animate={{
+                y: [0, -24, 0],
+                opacity: [0.4, 1, 0.4],
+                scale: [1, 1.3, 1],
+              }}
+              transition={{
+                duration: p.duration,
+                delay: p.delay,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Radial glow */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary-50/40 via-transparent to-secondary-50/30 dark:from-primary-900/15 dark:to-secondary-900/10" />
 
       <div className="container-custom relative">
-        {/* Enhanced grid layout with improved animations */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
-          {/* Content - 3 columns */}
-          <div className="lg:col-span-3 space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-400">
-                <Icon icon="lucide:shield-check" className="text-sm" />
+
+          {/* ── Left content ── */}
+          <motion.div
+            className="lg:col-span-3 space-y-6"
+            variants={container}
+            initial={reduce ? undefined : 'hidden'}
+            animate="show"
+          >
+            {/* Badge */}
+            <motion.div variants={reduce ? undefined : item}>
+              <motion.span
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest bg-primary/10 text-primary border border-primary/20"
+                whileHover={reduce ? undefined : { scale: 1.05 }}
+              >
+                <motion.span
+                  className="h-2 w-2 rounded-full bg-primary"
+                  animate={reduce ? undefined : { opacity: [1, 0.3, 1], scale: [1, 1.4, 1] }}
+                  transition={{ duration: 1.6, repeat: Infinity }}
+                />
                 Security-Focused Developer
-              </span>
+              </motion.span>
             </motion.div>
 
-            <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-balance"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+            {/* Headline */}
+            <motion.h1
+              variants={reduce ? undefined : item}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
             >
-              I build <span className="gradient-text">secure, high-performance</span> web apps.
+              I build{' '}
+              <span className="hero-gradient-text">secure,</span>
+              <br />
+              <span className="hero-gradient-text">high-performance</span>
+              <br />
+              web apps.
             </motion.h1>
 
-            <motion.p 
-              className="text-lg md:text-xl text-foreground-600 dark:text-foreground-400 max-w-2xl text-balance"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+            {/* Typewriter role */}
+            <motion.div variants={reduce ? undefined : item} className="flex items-center gap-2 text-xl font-medium text-foreground-600 dark:text-foreground-400">
+              <Icon icon="lucide:terminal" className="text-primary shrink-0" />
+              <span>{reduce ? ROLES[0] : role}</span>
+              {!reduce && <span className="typewriter-cursor text-primary" />}
+            </motion.div>
+
+            {/* Description */}
+            <motion.p
+              variants={reduce ? undefined : item}
+              className="text-lg text-foreground-600 dark:text-foreground-400 max-w-2xl leading-relaxed"
             >
               Full-stack developer and cybersecurity engineer with 2.3+ years of experience building and hardening web applications.
             </motion.p>
 
-            <motion.div 
+            {/* CTA buttons */}
+            <motion.div
+              variants={reduce ? undefined : item}
               className="flex flex-wrap gap-4 pt-2"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <Button
-                as={Link}
-                to="/projects"
-                color="primary"
-                size="lg"
-                startContent={<Icon icon="lucide:layout-grid" />}
-              >
-                View Projects
-              </Button>
-              <Button
-                as={Link}
-                to="/contact"
-                color="primary"
-                variant="bordered"
-                size="lg"
-                startContent={<Icon icon="lucide:message-square" />}
-              >
-                Hire Me
-              </Button>
-              <Tooltip content="Download Resume (PDF)">
+              <motion.div whileHover={reduce ? undefined : { scale: 1.04 }} whileTap={reduce ? undefined : { scale: 0.97 }}>
                 <Button
-                  as="a"
-                  href="/resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  color="default"
-                  variant="flat"
+                  as={Link}
+                  to="/projects"
+                  color="primary"
                   size="lg"
-                  isIconOnly
+                  className="shimmer font-semibold shadow-lg shadow-primary/25"
+                  startContent={<Icon icon="lucide:layout-grid" />}
                 >
-                  <Icon icon="lucide:download" className="text-xl" />
+                  View Projects
                 </Button>
+              </motion.div>
+              <motion.div whileHover={reduce ? undefined : { scale: 1.04 }} whileTap={reduce ? undefined : { scale: 0.97 }}>
+                <Button
+                  as={Link}
+                  to="/contact"
+                  color="primary"
+                  variant="bordered"
+                  size="lg"
+                  className="font-semibold"
+                  startContent={<Icon icon="lucide:message-square" />}
+                >
+                  Hire Me
+                </Button>
+              </motion.div>
+              <Tooltip content="Download Resume (PDF)">
+                <motion.div whileHover={reduce ? undefined : { scale: 1.1, rotate: 5 }} whileTap={reduce ? undefined : { scale: 0.95 }}>
+                  <Button
+                    as="a"
+                    href="/resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    color="default"
+                    variant="flat"
+                    size="lg"
+                    isIconOnly
+                  >
+                    <Icon icon="lucide:download" className="text-xl" />
+                  </Button>
+                </motion.div>
               </Tooltip>
             </motion.div>
 
-            {/* Enhanced skill badges */}
-            <motion.div 
-              className="flex items-center gap-2 pt-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+            {/* Skill badges */}
+            <motion.div
+              variants={reduce ? undefined : item}
+              className="flex items-center gap-3 pt-2"
             >
               <div className="flex -space-x-2">
-                <div className="w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900/50 flex items-center justify-center">
-                  <Icon icon="lucide:code" className="text-primary-600 dark:text-primary-400" />
-                </div>
-                <div className="w-8 h-8 rounded-full bg-secondary-100 dark:bg-secondary-900/50 flex items-center justify-center">
-                  <Icon icon="lucide:shield" className="text-secondary-600 dark:text-secondary-400" />
-                </div>
-                <div className="w-8 h-8 rounded-full bg-success-100 dark:bg-success-900/50 flex items-center justify-center">
-                  <Icon icon="lucide:zap" className="text-success-600 dark:text-success-400" />
-                </div>
+                {[
+                  { icon: 'lucide:code', bg: 'bg-primary-100 dark:bg-primary-900/50', color: 'text-primary-600 dark:text-primary-400' },
+                  { icon: 'lucide:shield', bg: 'bg-secondary-100 dark:bg-secondary-900/50', color: 'text-secondary-600 dark:text-secondary-400' },
+                  { icon: 'lucide:zap', bg: 'bg-success-100 dark:bg-success-900/50', color: 'text-success-600 dark:text-success-400' },
+                ].map((b, i) => (
+                  <motion.div
+                    key={i}
+                    className={`w-9 h-9 rounded-full ${b.bg} flex items-center justify-center border-2 border-background`}
+                    whileHover={reduce ? undefined : { scale: 1.2, zIndex: 10 }}
+                    transition={{ type: 'spring', stiffness: 400 }}
+                  >
+                    <Icon icon={b.icon} className={`${b.color} text-sm`} />
+                  </motion.div>
+                ))}
               </div>
-              <span className="text-sm text-foreground-500">Development • Security • Performance</span>
+              <span className="text-sm text-foreground-500 font-medium">Development • Security • Performance</span>
             </motion.div>
-          </div>
+          </motion.div>
 
-          {/* Enhanced image section with animated security elements */}
-          <motion.div 
+          {/* ── Right image ── */}
+          <motion.div
             className="lg:col-span-2 relative"
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={reduce ? undefined : { opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="relative">
-              {/* Main image with security-themed overlay */}
-              <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-primary-600 to-secondary-600 p-1">
+              {/* Glow ring */}
+              <motion.div
+                className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/20 to-secondary/20 blur-2xl"
+                animate={reduce ? undefined : { opacity: [0.5, 0.8, 0.5] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+
+              {/* Image frame */}
+              <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-primary-600 to-secondary-600 p-[2px]">
                 <div className="relative rounded-xl overflow-hidden aspect-[4/5] md:aspect-[3/4]">
-                   <img 
-                     src="/img/hero_img.png" 
-                     alt="Yeasine Dewan" 
-                     className="w-full h-full object-cover"
-                   />
-                   {/* Security overlay pattern */}
-                   <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent"></div>
-                   
-                   {/* Animated security scan effect */}
-                   <div className="absolute inset-0 overflow-hidden">
-                     <div className="absolute inset-0 border-t-2 border-white/20 dark:border-primary-300/40 animate-scan"></div>
-                   </div>
+                  <img
+                    src="/img/hero_img.png"
+                    alt="Yeasine Dewan"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  {/* Scan line */}
+                  {!reduce && (
+                    <div className="absolute inset-0 overflow-hidden">
+                      <div className="absolute inset-0 border-t border-white/20 dark:border-primary-300/40 animate-scan" />
+                    </div>
+                  )}
                 </div>
               </div>
-              
-              {/* Enhanced floating security badge */}
-              <motion.div 
-                className="absolute -bottom-4 -left-4 bg-content1 shadow-lg rounded-lg p-3 flex items-center gap-2 border border-content3"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+
+              {/* Bottom badge */}
+              <motion.div
+                className="absolute -bottom-5 -left-5 bg-content1/95 backdrop-blur-md shadow-xl rounded-xl p-3 flex items-center gap-2.5 border border-content3"
+                initial={reduce ? undefined : { opacity: 0, y: 20, scale: 0.8 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 0.7, type: 'spring', stiffness: 200 }}
+                whileHover={reduce ? undefined : { scale: 1.05 }}
               >
                 <div className="w-10 h-10 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
                   <Icon icon="lucide:shield-check" className="text-primary-600 dark:text-primary-400 text-xl" />
                 </div>
                 <div>
                   <p className="text-xs text-foreground-500">Security-Focused</p>
-                  <p className="text-sm font-medium">Full-Stack Engineer</p>
+                  <p className="text-sm font-semibold">Full-Stack Engineer</p>
                 </div>
               </motion.div>
-              
-              {/* Enhanced floating experience badge */}
-              <motion.div 
-                className="absolute -top-4 -right-4 bg-content1 shadow-lg rounded-lg p-3 flex items-center gap-2 border border-content3"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
+
+              {/* Top badge */}
+              <motion.div
+                className="absolute -top-5 -right-5 bg-content1/95 backdrop-blur-md shadow-xl rounded-xl p-3 flex items-center gap-2.5 border border-content3"
+                initial={reduce ? undefined : { opacity: 0, y: -20, scale: 0.8 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 0.85, type: 'spring', stiffness: 200 }}
+                whileHover={reduce ? undefined : { scale: 1.05 }}
               >
                 <div className="w-10 h-10 rounded-full bg-secondary-100 dark:bg-secondary-900/30 flex items-center justify-center">
                   <Icon icon="lucide:briefcase" className="text-secondary-600 dark:text-secondary-400 text-xl" />
                 </div>
                 <div>
                   <p className="text-xs text-foreground-500">Experience</p>
-                  <p className="text-sm font-medium">2.3+ Years</p>
+                  <p className="text-sm font-semibold">2.3+ Years</p>
+                </div>
+              </motion.div>
+
+              {/* Stats badge */}
+              <motion.div
+                className="absolute top-1/2 -right-6 -translate-y-1/2 bg-content1/95 backdrop-blur-md shadow-xl rounded-xl p-3 border border-content3"
+                initial={reduce ? undefined : { opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1, type: 'spring', stiffness: 200 }}
+                whileHover={reduce ? undefined : { scale: 1.05 }}
+              >
+                <div className="flex flex-col items-center gap-1">
+                  <span className="text-2xl font-bold text-primary">15+</span>
+                  <span className="text-xs text-foreground-500 whitespace-nowrap">Projects Done</span>
                 </div>
               </motion.div>
             </div>

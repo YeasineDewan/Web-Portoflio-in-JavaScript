@@ -1,56 +1,67 @@
 import { Link } from 'react-router-dom';
 import { Card, CardBody, CardFooter, Button, Chip } from '@heroui/react';
 import { Icon } from '@iconify/react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { projects } from '../../data/projects';
 import { ContentArtwork } from '../utils/ContentArtwork';
+import { Section, SectionHeading, stagger, fadeUp } from '../utils/PageLayout';
 
 export const FeaturedProjects = () => {
-  // Get only featured projects
-  const featuredProjects = projects.filter(project => project.featured).slice(0, 3);
-  
-  return (
-    <section className="section-padding bg-content2/50">
-      <div className="container-custom">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-12">
-          <div>
-            <h2 className="text-3xl font-bold mb-2">Featured Projects</h2>
-            <p className="text-foreground-500 max-w-2xl">
-              Explore some of my recent work focused on security, performance, and user experience.
-            </p>
-          </div>
-          <Button
-            as={Link}
-            to="/projects"
-            color="primary"
-            variant="flat"
-            endContent={<Icon icon="lucide:arrow-right" />}
-          >
-            View All Projects
-          </Button>
-        </div>
+  const reduce = useReducedMotion();
+  const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredProjects.map((project, index) => (
+  return (
+    <Section className="bg-content2/40">
+      <div className="container-custom">
+        <motion.div
+          variants={reduce ? undefined : stagger(0.1)}
+          className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-12"
+        >
+          <SectionHeading
+            badge="Portfolio"
+            title="Featured "
+            highlight="Projects"
+            description="Explore recent work focused on security, performance, and user experience."
+            center={false}
+          />
+          <motion.div variants={reduce ? undefined : fadeUp}>
+            <Button
+              as={Link}
+              to="/projects"
+              color="primary"
+              variant="flat"
+              endContent={<Icon icon="lucide:arrow-right" />}
+            >
+              View All Projects
+            </Button>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          variants={reduce ? undefined : stagger(0.12)}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {featuredProjects.map((project) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
+              variants={reduce ? undefined : fadeUp}
+              whileHover={reduce ? undefined : { y: -8, transition: { duration: 0.25 } }}
+              className="card-glow"
             >
-              <Card className="h-full card-hover">
+              <Card className="h-full overflow-hidden border border-content3/50">
                 <CardBody className="p-0">
-                  <div className="relative aspect-video">
+                  <div className="relative aspect-video overflow-hidden">
                     <ContentArtwork
                       src={project.coverImage}
                       title={project.title}
                       keywords={`${project.tags.join(' ')} ${project.techStack.join(' ')}`}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute top-2 right-2">
-                      <Chip 
-                        color="primary" 
-                        variant="flat" 
+                      <Chip
+                        color="primary"
+                        variant="flat"
                         size="sm"
                         startContent={<Icon icon="lucide:star" className="text-xs" />}
                       >
@@ -72,10 +83,10 @@ export const FeaturedProjects = () => {
                   </div>
                 </CardBody>
                 <CardFooter className="flex justify-between gap-2 pt-0">
-                  <Button 
+                  <Button
                     as={Link}
                     to={`/projects/${project.slug}`}
-                    color="primary" 
+                    color="primary"
                     variant="flat"
                     className="flex-1"
                   >
@@ -83,27 +94,12 @@ export const FeaturedProjects = () => {
                   </Button>
                   <div className="flex gap-2">
                     {project.liveUrl && (
-                      <Button 
-                        as="a"
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        isIconOnly
-                        variant="light"
-                        color="primary"
-                      >
+                      <Button as="a" href={project.liveUrl} target="_blank" rel="noopener noreferrer" isIconOnly variant="light" color="primary">
                         <Icon icon="lucide:external-link" />
                       </Button>
                     )}
                     {project.repoUrl && (
-                      <Button 
-                        as="a"
-                        href={project.repoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        isIconOnly
-                        variant="light"
-                      >
+                      <Button as="a" href={project.repoUrl} target="_blank" rel="noopener noreferrer" isIconOnly variant="light">
                         <Icon icon="lucide:github" />
                       </Button>
                     )}
@@ -112,8 +108,8 @@ export const FeaturedProjects = () => {
               </Card>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </Section>
   );
 };

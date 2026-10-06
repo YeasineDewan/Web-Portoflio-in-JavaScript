@@ -146,13 +146,13 @@ export const Navbar = () => {
       {/* ── Desktop Navbar (lg+) ─────────────────────────────────── */}
       <HeroNavbar
         maxWidth="full"
-        className="hidden lg:flex shadow-none h-14 bg-[#eae7e8] dark:bg-transparent"
+        className="hidden lg:flex shadow-none h-14 bg-white/90 dark:bg-transparent"
       >
         <NavbarContent>
           <NavbarBrand>
             <RouterLink to="/" className="flex items-center gap-2.5">
               <img src="/img/favicon/icon.svg" alt="" className="h-10 w-10 shrink-0 object-contain" />
-              <span className="font-semibold text-sm tracking-tight text-[#0a0a0a] dark:text-white">Yeasine Dewan Shawon</span>
+              <span className="font-semibold text-sm tracking-tight">Yeasine Dewan Shawon</span>
             </RouterLink>
           </NavbarBrand>
         </NavbarContent>
@@ -165,8 +165,8 @@ export const Navbar = () => {
                 to={item.path}
                 className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
                   isActive(item.path)
-                    ? 'text-primary bg-primary/10'
-                    : 'text-[#414141] hover:text-[#0a0a0a] hover:bg-[#d5cfd1] dark:text-white/75 dark:hover:text-white dark:hover:bg-white/10'
+                    ? 'text-primary bg-primary/8'
+                    : 'text-foreground-500 hover:text-foreground hover:bg-black/[0.05] dark:text-white/75 dark:hover:text-white dark:hover:bg-white/10'
                 }`}
               >
                 {item.name}
@@ -206,18 +206,18 @@ export const Navbar = () => {
       </HeroNavbar>
 
       {/* ── Mobile Navbar (< lg) ─────────────────────────────────── */}
-      <div className="lg:hidden bg-[#eae7e8] dark:bg-transparent">
+      <div className="lg:hidden bg-white/90 dark:bg-transparent">
         <div className="flex h-14 items-center justify-between px-4">
           <RouterLink to="/" className="flex items-center gap-2">
             <img src="/img/favicon/icon.svg" alt="" className="h-10 w-10 shrink-0 object-contain" />
-            <span className="font-semibold text-sm tracking-tight text-[#0a0a0a] dark:text-white">Yeasine Dewan Shawon</span>
+            <span className="font-semibold text-sm tracking-tight">Yeasine Dewan Shawon</span>
           </RouterLink>
 
           <button
             onClick={() => setOpen(true)}
             aria-label="Open navigation menu"
             aria-expanded={open}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-[#414141] hover:bg-[#d5cfd1] dark:text-white/70 dark:hover:bg-white/10 transition-colors"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-foreground-500 hover:bg-black/[0.06] dark:text-white/70 dark:hover:bg-white/10 transition-colors"
           >
             <Icon icon="lucide:menu" className="text-xl" />
           </button>
