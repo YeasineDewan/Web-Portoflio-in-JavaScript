@@ -35,11 +35,11 @@ export const Footer = () => {
         <div className="grid grid-cols-1 gap-x-10 gap-y-12 text-center sm:grid-cols-2 sm:text-left lg:grid-cols-[1.35fr_0.8fr_1fr_1.2fr]">
           <div className="flex flex-col items-center gap-4 sm:items-start">
             <div className="flex items-center gap-3">
-              <img src="/img/favicon/icon.svg" alt="" className="h-10 w-10 object-contain" />
-              <span className="text-lg font-semibold">Yeasine Dewan</span>
+              <img src="/img/favicon/icon.svg" alt="" className="h-12 w-12 shrink-0 object-contain" />
+              <span className="text-lg font-semibold">Yeasine Dewan Shawon</span>
             </div>
             <p className="max-w-sm text-sm leading-6 text-foreground-500">
-              Full-stack developer and security-minded engineer building and hardening web applications.
+              Cybersecurity-focused Full-Stack Engineer crafting secure, scalable, and high-performance web solutions — where clean code meets robust defence.
             </p>
             <div className="mt-1 flex flex-wrap justify-center gap-2.5 sm:justify-start">
               {socialLinks.map((link) => (
@@ -50,7 +50,7 @@ export const Footer = () => {
                   className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-divider bg-content1 text-foreground-500 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary"
                   aria-label={link.name}
                 >
-                  <Icon icon={link.icon} className="text-lg" />
+                  <Icon icon={link.icon} className="text-xl" />
                 </Link>
               ))}
             </div>
