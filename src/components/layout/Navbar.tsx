@@ -67,9 +67,7 @@ export const Navbar = () => {
             className="flex items-center gap-2"
             onClick={() => setOpen(false)}
           >
-            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary">
-              <Icon icon="lucide:shield-check" className="text-white text-sm" />
-            </div>
+            <img src="/img/favicon/icon.svg" alt="" className="h-7 w-7 object-contain" />
             <span className="font-semibold text-sm">Yeasine Dewan</span>
           </RouterLink>
           <button
@@ -153,9 +151,7 @@ export const Navbar = () => {
         <NavbarContent>
           <NavbarBrand>
             <RouterLink to="/" className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary shadow-sm">
-                <Icon icon="lucide:shield-check" className="text-white text-base" />
-              </div>
+              <img src="/img/favicon/icon.svg" alt="" className="h-8 w-8 object-contain" />
               <span className="font-semibold text-sm tracking-tight text-[#0a0a0a] dark:text-white">Yeasine Dewan</span>
             </RouterLink>
           </NavbarBrand>
@@ -213,9 +209,7 @@ export const Navbar = () => {
       <div className="lg:hidden bg-[#eae7e8] dark:bg-transparent">
         <div className="flex h-14 items-center justify-between px-4">
           <RouterLink to="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary shadow-sm">
-              <Icon icon="lucide:shield-check" className="text-white text-base" />
-            </div>
+            <img src="/img/favicon/icon.svg" alt="" className="h-8 w-8 object-contain" />
             <span className="font-semibold text-sm tracking-tight text-[#0a0a0a] dark:text-white">Yeasine Dewan</span>
           </RouterLink>
 

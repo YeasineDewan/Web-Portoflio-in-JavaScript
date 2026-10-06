@@ -35,9 +35,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 gap-x-10 gap-y-12 text-center sm:grid-cols-2 sm:text-left lg:grid-cols-[1.35fr_0.8fr_1fr_1.2fr]">
           <div className="flex flex-col items-center gap-4 sm:items-start">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white shadow-sm">
-                <Icon icon="lucide:shield-check" className="text-xl" />
-              </div>
+              <img src="/img/favicon/icon.svg" alt="" className="h-10 w-10 object-contain" />
               <span className="text-lg font-semibold">Yeasine Dewan</span>
             </div>
             <p className="max-w-sm text-sm leading-6 text-foreground-500">
