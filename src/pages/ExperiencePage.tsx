@@ -1,4 +1,5 @@
 import { Experience } from '../components/about/Experience';
+import { FreelancingWorks } from '../components/about/FreelancingWorks';
 import { Education } from '../components/about/Education';
 import { ContactCTA } from '../components/home/ContactCTA';
 import { PageBackground, PageHero } from '../components/utils/PageLayout';
@@ -36,6 +37,7 @@ export const ExperiencePage = () => {
         </motion.div>
       </PageHero>
       <Experience />
+      <FreelancingWorks />
       <Education />
       <ContactCTA />
     </PageBackground>
