@@ -8,7 +8,7 @@ import { Section, SectionHeading, stagger, fadeUp } from '../utils/PageLayout';
 
 export const FeaturedProjects = () => {
   const reduce = useReducedMotion();
-  const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
+  const featuredProjects = projects.filter(p => p.featured).slice(0, 6);
 
   return (
     <Section className="bg-content2/40">

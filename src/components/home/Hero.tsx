@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Tooltip } from '@heroui/react';
 import { Icon } from '@iconify/react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { projects } from '../../data/projects';
 
 const ROLES = ['Full-Stack Engineer', 'Cybersecurity Expert', 'Penetration Tester', 'Web Architect'];
 
@@ -314,8 +315,8 @@ export const Hero = () => {
                 whileHover={reduce ? undefined : { scale: 1.05 }}
               >
                 <div className="flex flex-col items-center gap-1">
-                  <span className="text-2xl font-bold text-primary">15+</span>
-                  <span className="text-xs text-foreground-500 whitespace-nowrap">Projects Done</span>
+                <span className="text-2xl font-bold text-primary">{projects.length}</span>
+                <span className="text-xs text-foreground-500 whitespace-nowrap">Projects Done</span>
                 </div>
               </motion.div>
             </div>
