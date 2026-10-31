@@ -7,14 +7,14 @@ import { projects } from '../../data/projects';
 
 const ROLES = ['Full-Stack Engineer', 'Cybersecurity Expert', 'Penetration Tester', 'Web Architect'];
 
-const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
-  id: i,
-  size: 4 + Math.random() * 6,
-  x: Math.random() * 100,
-  y: Math.random() * 100,
-  duration: 4 + Math.random() * 6,
-  delay: Math.random() * 4,
-}));
+const PARTICLES = [
+  [8, 14, 5, 5.2, 0.2], [19, 62, 7, 6.1, 1.4], [31, 28, 4, 4.8, 2.1],
+  [44, 76, 6, 7.2, 0.8], [57, 17, 5, 5.7, 2.8], [68, 52, 8, 6.5, 1.1],
+  [79, 23, 4, 4.4, 3.2], [91, 72, 6, 7.8, 0.5], [13, 88, 5, 5.9, 2.4],
+  [26, 43, 7, 6.8, 1.7], [38, 8, 4, 4.6, 3.5], [52, 91, 6, 7.1, 0.9],
+  [63, 35, 5, 5.4, 2.7], [74, 84, 7, 6.3, 1.9], [86, 46, 4, 4.9, 3.1],
+  [96, 12, 6, 7.5, 0.7], [4, 51, 5, 5.6, 2.2], [48, 58, 7, 6.6, 1.3],
+].map(([x, y, size, duration, delay], id) => ({ id, x, y, size, duration, delay }));
 
 const BEAMS = [
   { left: '15%', height: '40%', top: '0', delay: '0s', duration: '4s' },
@@ -183,19 +183,6 @@ export const Hero = () => {
                   Hire Me
                 </Button>
               </motion.div>
-              <motion.div whileHover={reduce ? undefined : { scale: 1.04 }} whileTap={reduce ? undefined : { scale: 0.97 }}>
-                <Button
-                  as={Link}
-                  to="/hire-me"
-                  color="primary"
-                  variant="bordered"
-                  size="lg"
-                  className="font-semibold"
-                  startContent={<Icon icon="lucide:message-square" />}
-                >
-                  Hire Me
-                </Button>
-              </motion.div>
               <Tooltip content="Download Resume (PDF)">
                 <motion.div whileHover={reduce ? undefined : { scale: 1.1, rotate: 5 }} whileTap={reduce ? undefined : { scale: 0.95 }}>
                   <Button
@@ -260,7 +247,10 @@ export const Hero = () => {
                   <img
                     src="/img/hero_img.png"
                     alt="Yeasine Dewan"
-                    className="w-full h-full object-cover"
+                    width={1086}
+                    height={1448}
+                    decoding="async"
+                    className="block w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   {/* Scan line */}

@@ -38,9 +38,21 @@ function App() {
   const [cursor, setCursor] = React.useState({ x: -999, y: -999 });
   React.useEffect(() => {
     if (reduceMotion) return;
-    const move = (e: MouseEvent) => setCursor({ x: e.clientX, y: e.clientY });
-    window.addEventListener('mousemove', move);
-    return () => window.removeEventListener('mousemove', move);
+    let frame = 0;
+    let nextPosition = { x: -999, y: -999 };
+    const move = (e: MouseEvent) => {
+      nextPosition = { x: e.clientX, y: e.clientY };
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        setCursor(nextPosition);
+        frame = 0;
+      });
+    };
+    window.addEventListener('mousemove', move, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', move);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, [reduceMotion]);
 
   return (
