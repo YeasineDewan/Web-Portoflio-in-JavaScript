@@ -17,7 +17,7 @@ export const ExperiencePage = () => {
         title="My "
         highlight="Experience"
         description="Over 2.3 years of hands-on experience in web development and cybersecurity — building secure, high-performance applications across diverse roles and projects."
-        image="/img/exp_img.png"
+        image="/img/exp_img.webp"
         imageAlt="Experience hero image"
         imagePosition="left"
       >

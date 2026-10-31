@@ -9,7 +9,7 @@ export const SkillsPage = () => (
       title="My Skills & "
       highlight="Technologies"
       description="A comprehensive overview of the technologies, frameworks, and tools I use to build secure, high-performance web applications."
-      image="/img/skill_img.png"
+      image="/img/skill_img.webp"
       imageAlt="Skills hero image"
       imagePosition="left"
     />

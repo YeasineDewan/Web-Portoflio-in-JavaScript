@@ -204,15 +204,15 @@ export const PageHero: React.FC<PageHeroProps> = ({
           {image && (
             <motion.div
               variants={reduce ? undefined : fadeUp}
-              className={`relative mx-auto w-full max-w-lg ${imagePosition === 'left' ? 'lg:order-1 lg:mr-auto' : 'lg:order-2 lg:ml-auto'}`}
+              className={`relative mx-auto w-full max-w-xl ${imagePosition === 'left' ? 'lg:order-1 lg:mr-auto' : 'lg:order-2 lg:ml-auto'}`}
             >
-              <div className="relative flex min-h-[320px] items-end justify-center rounded-2xl px-4 sm:min-h-[420px] lg:min-h-[500px]">
+              <div className="relative flex min-h-[360px] items-end justify-center rounded-2xl px-4 sm:min-h-[500px] lg:min-h-[620px]">
                 <img
                   src={image}
                   alt={imageAlt}
                   width={1086}
                   height={1448}
-                  className="relative block h-auto max-h-[500px] w-auto max-w-full object-contain drop-shadow-2xl"
+                  className="relative block h-auto max-h-[620px] w-auto max-w-full object-contain drop-shadow-2xl"
                   loading="eager"
                   decoding="async"
                 />
