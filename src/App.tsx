@@ -8,22 +8,37 @@ import { Footer } from './components/layout/Footer';
 import { ScrollToTop } from './components/utils/ScrollToTop';
 import { ScrollToTopButton } from './components/utils/ScrollToTopButton';
 
-const HomePage = React.lazy(() => import('./pages/HomePage').then(({ HomePage }) => ({ default: HomePage })));
-const AboutPage = React.lazy(() => import('./pages/AboutPage').then(({ AboutPage }) => ({ default: AboutPage })));
-const SkillsPage = React.lazy(() => import('./pages/SkillsPage').then(({ SkillsPage }) => ({ default: SkillsPage })));
-const ExperiencePage = React.lazy(() => import('./pages/ExperiencePage').then(({ ExperiencePage }) => ({ default: ExperiencePage })));
-const ProjectsPage = React.lazy(() => import('./pages/ProjectsPage').then(({ ProjectsPage }) => ({ default: ProjectsPage })));
-const ProjectDetailPage = React.lazy(() => import('./pages/ProjectDetailPage').then(({ ProjectDetailPage }) => ({ default: ProjectDetailPage })));
-const BlogPage = React.lazy(() => import('./pages/BlogPage').then(({ BlogPage }) => ({ default: BlogPage })));
-const BlogPostPage = React.lazy(() => import('./pages/BlogPostPage').then(({ BlogPostPage }) => ({ default: BlogPostPage })));
-const CertificationsPage = React.lazy(() => import('./pages/CertificationsPage').then(({ CertificationsPage }) => ({ default: CertificationsPage })));
-const ServicesPage = React.lazy(() => import('./pages/ServicesPage').then(({ ServicesPage }) => ({ default: ServicesPage })));
-const ServiceDetailPage = React.lazy(() => import('./pages/ServiceDetailPage').then(({ ServiceDetailPage }) => ({ default: ServiceDetailPage })));
-const ContactPage = React.lazy(() => import('./pages/ContactPage').then(({ ContactPage }) => ({ default: ContactPage })));
-const HireMePage = React.lazy(() => import('./pages/HireMePage').then(({ HireMePage }) => ({ default: HireMePage })));
-const PrivacyPolicyPage = React.lazy(() => import('./pages/LegalPages').then(({ PrivacyPolicyPage }) => ({ default: PrivacyPolicyPage })));
-const TermsPage = React.lazy(() => import('./pages/LegalPages').then(({ TermsPage }) => ({ default: TermsPage })));
-const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage').then(({ NotFoundPage }) => ({ default: NotFoundPage })));
+function lazyWithRetry<T extends React.ComponentType<any>>(load: () => Promise<{ default: T }>) {
+  return React.lazy(async () => {
+    try {
+      return await load();
+    } catch (error) {
+      const reloadKey = `portfolio:chunk-reload:${window.location.pathname}`;
+      if (!sessionStorage.getItem(reloadKey)) {
+        sessionStorage.setItem(reloadKey, '1');
+        window.location.reload();
+      }
+      throw error;
+    }
+  });
+}
+
+const HomePage = lazyWithRetry(() => import('./pages/HomePage').then(({ HomePage }) => ({ default: HomePage })));
+const AboutPage = lazyWithRetry(() => import('./pages/AboutPage').then(({ AboutPage }) => ({ default: AboutPage })));
+const SkillsPage = lazyWithRetry(() => import('./pages/SkillsPage').then(({ SkillsPage }) => ({ default: SkillsPage })));
+const ExperiencePage = lazyWithRetry(() => import('./pages/ExperiencePage').then(({ ExperiencePage }) => ({ default: ExperiencePage })));
+const ProjectsPage = lazyWithRetry(() => import('./pages/ProjectsPage').then(({ ProjectsPage }) => ({ default: ProjectsPage })));
+const ProjectDetailPage = lazyWithRetry(() => import('./pages/ProjectDetailPage').then(({ ProjectDetailPage }) => ({ default: ProjectDetailPage })));
+const BlogPage = lazyWithRetry(() => import('./pages/BlogPage').then(({ BlogPage }) => ({ default: BlogPage })));
+const BlogPostPage = lazyWithRetry(() => import('./pages/BlogPostPage').then(({ BlogPostPage }) => ({ default: BlogPostPage })));
+const CertificationsPage = lazyWithRetry(() => import('./pages/CertificationsPage').then(({ CertificationsPage }) => ({ default: CertificationsPage })));
+const ServicesPage = lazyWithRetry(() => import('./pages/ServicesPage').then(({ ServicesPage }) => ({ default: ServicesPage })));
+const ServiceDetailPage = lazyWithRetry(() => import('./pages/ServiceDetailPage').then(({ ServiceDetailPage }) => ({ default: ServiceDetailPage })));
+const ContactPage = lazyWithRetry(() => import('./pages/ContactPage').then(({ ContactPage }) => ({ default: ContactPage })));
+const HireMePage = lazyWithRetry(() => import('./pages/HireMePage').then(({ HireMePage }) => ({ default: HireMePage })));
+const PrivacyPolicyPage = lazyWithRetry(() => import('./pages/LegalPages').then(({ PrivacyPolicyPage }) => ({ default: PrivacyPolicyPage })));
+const TermsPage = lazyWithRetry(() => import('./pages/LegalPages').then(({ TermsPage }) => ({ default: TermsPage })));
+const NotFoundPage = lazyWithRetry(() => import('./pages/NotFoundPage').then(({ NotFoundPage }) => ({ default: NotFoundPage })));
 
 function App() {
   const { theme } = useTheme();
