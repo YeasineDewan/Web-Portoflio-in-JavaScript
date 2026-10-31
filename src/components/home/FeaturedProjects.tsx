@@ -1,0 +1,115 @@
+import { Link } from 'react-router-dom';
+import { Card, CardBody, CardFooter, Button, Chip } from '@heroui/react';
+import { Icon } from '@iconify/react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { projects } from '../../data/projects';
+import { ContentArtwork } from '../utils/ContentArtwork';
+import { Section, SectionHeading, stagger, fadeUp } from '../utils/PageLayout';
+
+export const FeaturedProjects = () => {
+  const reduce = useReducedMotion();
+  const featuredProjects = projects.filter(p => p.featured).slice(0, 6);
+
+  return (
+    <Section className="bg-content2/40">
+      <div className="container-custom">
+        <motion.div
+          variants={reduce ? undefined : stagger(0.1)}
+          className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-12"
+        >
+          <SectionHeading
+            badge="Portfolio"
+            title="Featured "
+            highlight="Projects"
+            description="Explore recent work focused on security, performance, and user experience."
+            center={false}
+          />
+          <motion.div variants={reduce ? undefined : fadeUp}>
+            <Button
+              as={Link}
+              to="/projects"
+              color="primary"
+              variant="flat"
+              endContent={<Icon icon="lucide:arrow-right" />}
+            >
+              View All Projects
+            </Button>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          variants={reduce ? undefined : stagger(0.12)}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {featuredProjects.map((project) => (
+            <motion.div
+              key={project.id}
+              variants={reduce ? undefined : fadeUp}
+              whileHover={reduce ? undefined : { y: -8, transition: { duration: 0.25 } }}
+              className="card-glow"
+            >
+              <Card className="h-full overflow-hidden border border-content3/50">
+                <CardBody className="p-0">
+                  <div className="relative aspect-video overflow-hidden">
+                    <ContentArtwork
+                      src={project.coverImage}
+                      title={project.title}
+                      keywords={`${project.tags.join(' ')} ${project.techStack.join(' ')}`}
+                      className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute top-2 right-2">
+                      <Chip
+                        color="primary"
+                        variant="flat"
+                        size="sm"
+                        startContent={<Icon icon="lucide:star" className="text-xs" />}
+                      >
+                        Featured
+                      </Chip>
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                    <p className="text-foreground-500 mb-4 line-clamp-2">{project.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tags.slice(0, 3).map(tag => (
+                        <Chip key={tag} color="default" variant="flat" size="sm">{tag}</Chip>
+                      ))}
+                      {project.tags.length > 3 && (
+                        <Chip color="default" variant="flat" size="sm">+{project.tags.length - 3}</Chip>
+                      )}
+                    </div>
+                  </div>
+                </CardBody>
+                <CardFooter className="flex justify-between gap-2 pt-0">
+                  <Button
+                    as={Link}
+                    to={`/projects/${project.slug}`}
+                    color="primary"
+                    variant="flat"
+                    className="flex-1"
+                  >
+                    View Details
+                  </Button>
+                  <div className="flex gap-2">
+                    {project.liveUrl && (
+                      <Button as="a" href={project.liveUrl} target="_blank" rel="noopener noreferrer" isIconOnly variant="light" color="primary">
+                        <Icon icon="lucide:external-link" />
+                      </Button>
+                    )}
+                    {project.repoUrl && (
+                      <Button as="a" href={project.repoUrl} target="_blank" rel="noopener noreferrer" isIconOnly variant="light">
+                        <Icon icon="lucide:github" />
+                      </Button>
+                    )}
+                  </div>
+                </CardFooter>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </Section>
+  );
+};
