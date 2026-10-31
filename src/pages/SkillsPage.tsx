@@ -11,6 +11,7 @@ export const SkillsPage = () => (
       description="A comprehensive overview of the technologies, frameworks, and tools I use to build secure, high-performance web applications."
       image="/img/skill_img.png"
       imageAlt="Skills hero image"
+      imagePosition="left"
     />
     <SkillsGrid />
     <ContactCTA />
