@@ -32,7 +32,7 @@ export const AboutHero = () => {
             variants={reduce ? undefined : container}
             initial={reduce ? undefined : 'hidden'}
             animate="show"
-            className="order-1 self-start pb-2 pt-10 sm:pt-12 lg:pb-12"
+            className="order-2 self-start pb-2 pt-10 sm:pt-12 lg:order-2 lg:pb-12"
           >
             {/* Badge */}
             <motion.div variants={reduce ? undefined : item} className="mb-5">
@@ -119,7 +119,7 @@ export const AboutHero = () => {
             initial={reduce ? undefined : { opacity: 0, x: 40, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="relative order-2 flex w-full items-end justify-center self-end lg:order-2 lg:justify-end"
+            className="relative order-1 flex w-full items-end justify-center self-end lg:order-1 lg:justify-start"
           >
             <div className="relative w-full max-w-[520px] self-end">
               {/* Glow */}
@@ -132,7 +132,11 @@ export const AboutHero = () => {
               <img
                 src="/img/about_hero_img.png"
                 alt="Yeasine Dewan - Professional Portrait"
-                className="relative block h-auto w-full drop-shadow-2xl"
+                width={1086}
+                height={1448}
+                loading="eager"
+                decoding="async"
+                className="relative block h-auto w-full object-contain drop-shadow-2xl"
               />
 
               {/* Language badge */}

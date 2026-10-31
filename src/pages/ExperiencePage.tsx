@@ -19,6 +19,7 @@ export const ExperiencePage = () => {
         description="Over 2.3 years of hands-on experience in web development and cybersecurity — building secure, high-performance applications across diverse roles and projects."
         image="/img/exp_img.png"
         imageAlt="Experience hero image"
+        imagePosition="left"
       >
         <motion.div
           whileHover={reduce ? undefined : { scale: 1.04 }}

@@ -122,11 +122,12 @@ interface PageHeroProps {
   description: string;
   image?: string;
   imageAlt?: string;
+  imagePosition?: 'left' | 'right';
   children?: React.ReactNode;
 }
 
 export const PageHero: React.FC<PageHeroProps> = ({
-  badge, title, highlight, description, image, imageAlt = '', children,
+  badge, title, highlight, description, image,   imageAlt = '', imagePosition = 'right', children,
 }) => {
   const reduce = useReducedMotion();
   const parts = highlight ? title.split(highlight) : [title];
@@ -149,7 +150,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
             variants={reduce ? undefined : stagger(0.13)}
             initial={reduce ? undefined : 'hidden'}
             animate="show"
-            className="max-w-3xl"
+            className={`max-w-3xl ${imagePosition === 'left' ? 'lg:order-2' : 'lg:order-1'}`}
           >
             {badge && (
               <motion.div variants={reduce ? undefined : fadeUp} className="mb-5">
@@ -203,16 +204,18 @@ export const PageHero: React.FC<PageHeroProps> = ({
           {image && (
             <motion.div
               variants={reduce ? undefined : fadeUp}
-              className="relative mx-auto w-full max-w-lg"
+              className={`relative mx-auto w-full max-w-lg ${imagePosition === 'left' ? 'lg:order-1 lg:mr-auto' : 'lg:order-2 lg:ml-auto'}`}
             >
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl shadow-black/30">
+              <div className="relative flex min-h-[320px] items-end justify-center rounded-2xl px-4 sm:min-h-[420px] lg:min-h-[500px]">
                 <img
                   src={image}
                   alt={imageAlt}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
+                  width={1086}
+                  height={1448}
+                  className="relative block h-auto max-h-[500px] w-auto max-w-full object-contain drop-shadow-2xl"
+                  loading="eager"
+                  decoding="async"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
               </div>
               {/* Decorative accent ring */}
               <div className="pointer-events-none absolute -inset-4 rounded-2xl border border-primary/15 -z-10" />
