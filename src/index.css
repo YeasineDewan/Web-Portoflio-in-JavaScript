@@ -12,6 +12,7 @@
 html,
 body {
   scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
   background-color: #f5f5f7;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -119,6 +120,8 @@ body {
 /* ── Site Background ─────────────────────────────────────────────────────── */
 .site-background {
   position: fixed;
+  contain: strict;
+  will-change: transform;
   inset: 0;
   z-index: 0;
   overflow: hidden;
@@ -345,6 +348,13 @@ body {
 @keyframes cursor-blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+.app-spotlight {
+  --spotlight-x: -999px;
+  --spotlight-y: -999px;
+  background: radial-gradient(400px circle at var(--spotlight-x) var(--spotlight-y), rgba(220, 38, 38, 0.04) 0%, transparent 70%);
+  will-change: background;
 }
 
 /* ── Scroll reveal ───────────────────────────────────────────────────────── */
@@ -663,6 +673,19 @@ body {
 
 .dark .hover-lift:hover {
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 767px) {
+  .site-background::before,
+  .site-background::after,
+  .orb,
+  .beam {
+    animation: none;
+  }
+
+  .site-background::after {
+    opacity: 0.12;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

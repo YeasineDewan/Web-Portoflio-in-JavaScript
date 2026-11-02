@@ -45,7 +45,7 @@ export const SubHeader = () => (
             href={s.url}
             isExternal
             aria-label={s.name}
-            className="inline-flex h-6 w-6 items-center justify-center rounded-md text-foreground-400 hover:text-primary hover:bg-primary/8 transition-colors"
+            className={`inline-flex h-6 w-6 items-center justify-center rounded-md text-foreground-400 hover:text-primary hover:bg-primary/8 transition-colors ${s.name === 'GitHub' ? 'dark:text-red-500 dark:hover:text-red-400' : ''}`}
           >
             <Icon icon={s.icon} width={13} height={13} />
           </Link>

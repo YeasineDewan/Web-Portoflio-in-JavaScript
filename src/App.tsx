@@ -34,17 +34,20 @@ function App() {
     document.documentElement.classList.toggle('dark', theme === 'dark');
   }, [theme]);
 
-  // Cursor spotlight
-  const [cursor, setCursor] = React.useState({ x: -999, y: -999 });
+  // Keep the spotlight in the compositor instead of re-rendering the whole app on every mouse move.
+  const spotlightRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     if (reduceMotion) return;
     let frame = 0;
     let nextPosition = { x: -999, y: -999 };
-    const move = (e: MouseEvent) => {
-      nextPosition = { x: e.clientX, y: e.clientY };
+    const move = (event: MouseEvent) => {
+      nextPosition = { x: event.clientX, y: event.clientY };
       if (frame) return;
       frame = window.requestAnimationFrame(() => {
-        setCursor(nextPosition);
+        if (spotlightRef.current) {
+          spotlightRef.current.style.setProperty('--spotlight-x', `${nextPosition.x}px`);
+          spotlightRef.current.style.setProperty('--spotlight-y', `${nextPosition.y}px`);
+        }
         frame = 0;
       });
     };
@@ -62,11 +65,9 @@ function App() {
       {/* Cursor spotlight */}
       {!reduceMotion && (
         <motion.div
-          className="pointer-events-none fixed inset-0 z-[1] hidden lg:block"
+          ref={spotlightRef}
+          className="pointer-events-none fixed inset-0 z-[1] hidden lg:block app-spotlight"
           aria-hidden="true"
-          style={{
-            background: `radial-gradient(400px circle at ${cursor.x}px ${cursor.y}px, rgba(220,38,38,0.04) 0%, transparent 70%)`,
-          }}
         />
       )}
 

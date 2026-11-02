@@ -80,7 +80,7 @@ export const Footer = () => {
                   <Link
                     href={link.url}
                     isExternal
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-divider bg-content1 text-foreground-500 transition-all hover:border-primary/40 hover:text-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-primary"
+                    className={`inline-flex h-10 w-10 items-center justify-center rounded-full border border-divider bg-content1 text-foreground-500 transition-all hover:border-primary/40 hover:text-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-primary ${link.name === 'GitHub' ? 'dark:text-red-500 dark:hover:text-red-400 dark:hover:border-red-500/40' : ''}`}
                     aria-label={link.name}
                   >
                     <Icon icon={link.icon} className="text-xl" />
